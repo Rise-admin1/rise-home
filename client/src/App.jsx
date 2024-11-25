@@ -1,0 +1,41 @@
+import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
+import Footer from "./components/Footer";
+import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom'
+import Careers from "./pages/Careers";
+
+function App() {
+
+  const Layout = () => {
+    return (
+      <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" ,backgroundColor:'#121212'}}>
+        <Navbar />
+        <div style={{ flex: 1 }}>
+          <Outlet className='' />
+        </div>
+        <Footer />
+      </div>
+    );
+  };
+
+  const router = createBrowserRouter([{
+    path: "/",
+    element: <Layout />,
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+      {
+        path: "/careers",
+        element: <Careers />,
+      },
+
+    ]
+  }]);
+  return <RouterProvider router={router} />;
+
+}
+
+
+export default App
