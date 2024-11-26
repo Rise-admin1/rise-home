@@ -26,7 +26,7 @@ const styles = {
     padding: { xs: '0.5rem 1rem', md: '0.5rem 2rem' },
   },
   imageContainer: {
-    backgroundColor: 'rgba(255, 255, 255, 0.8)',
+    backgroundColor: 'rgba(255, 255, 255, 0.7)',
     borderRadius: '50%', // Circular container to match the image
     padding: '6px', // Space between the image and the container
     display: 'flex',
