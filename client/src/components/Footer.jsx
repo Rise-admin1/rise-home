@@ -28,7 +28,6 @@ const styles = {
     gap: 2,
     textAlign: 'left',
   },
- 
   links: {
     display: 'flex',
     flexDirection: 'row',
@@ -54,7 +53,22 @@ const styles = {
     fontSize: '0.8rem',
     color: '#b3b3b3',
   },
+  addressSection: {
+    marginTop: '20px',
+    fontSize: '0.85rem',
+    color: '#d1d1d1',
+    textAlign: 'center',
+    lineHeight: 1.6,
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 1,
+  },
+  addressItem: {
+    color: '#d1d1d1',
+    fontSize: '0.9rem',
+  },
   imageContainer: {
+    backgroundColor: 'rgba(255, 255, 255, 0.8)',
     borderRadius: '50%', // Circular container to match the image
     padding: '10px', // Space between the image and the container
     display: 'flex',
@@ -86,7 +100,6 @@ const styles = {
   },
 };
 
-
 function Footer() {
   return (
     <Box sx={styles.footerContainer}>
@@ -95,14 +108,13 @@ function Footer() {
         {/* Logo */}
         <Box sx={styles.imageContainer}>
           <img sx={styles.logo} src={Logo} alt="Logo" width={100} height={30} />
-          </Box>
+        </Box>
 
         {/* Links */}
         <Box sx={styles.links}>
-        <HashLink smooth to="/#about">About Us</HashLink>
-        <HashLink smooth to="/#contact">Contact</HashLink>
-          <Typography>Privacy Policy</Typography>
-          <Typography>Terms of Service</Typography>
+          <HashLink smooth to="/#about">About Us</HashLink>
+          <HashLink smooth to="/#contact">Contact</HashLink>
+          <Link to="/careers">Careers</Link>
         </Box>
 
         {/* Social Media Icons */}
@@ -111,15 +123,28 @@ function Footer() {
             <Facebook />
           </IconButton> */}
           <Link to={{ pathname: "https://ae.linkedin.com/company/right-intellectual-services-rise-portal-ltd" }} target="_blank">
-          <IconButton sx={styles.socialIcon}>
-            <LinkedIn />
-          </IconButton>
+            <IconButton sx={styles.socialIcon}>
+              <LinkedIn />
+            </IconButton>
           </Link>
         </Box>
       </Box>
 
       {/* Divider */}
       <Divider sx={{ backgroundColor: '#444', marginY: 2 }} />
+
+      {/* Address, Phone, and Email Section */}
+      <Box sx={styles.addressSection}>
+        <Typography sx={styles.addressItem}>
+          Address: Gate Avenue, Zone D, Level 1, 201, Al Mustaqbal St, Dubai, UAE.
+        </Typography>
+        <Typography sx={styles.addressItem}>
+          Phone: +971 5677 91074
+        </Typography>
+        <Typography sx={styles.addressItem}>
+          Email: <a href="mailto:info@rightintellectual.ae" style={{ color: '#d1d1d1', textDecoration: 'none' }}>info@rightintellectual.ae</a>
+        </Typography>
+      </Box>
 
       {/* Bottom Section */}
       <Typography sx={styles.footerBottom}>

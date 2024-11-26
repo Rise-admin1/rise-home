@@ -28,7 +28,7 @@ const styles = {
   imageContainer: {
     backgroundColor: 'rgba(255, 255, 255, 0.8)',
     borderRadius: '50%', // Circular container to match the image
-    padding: '10px', // Space between the image and the container
+    padding: '6px', // Space between the image and the container
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',

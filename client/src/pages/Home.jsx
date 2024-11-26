@@ -3,6 +3,7 @@ import About from '../components/About'
 import FoundersNote from '../components/FoundersNote'
 import ServiceCard from '../components/ServiceCard'
 import ContactForm from '../components/ContactForm'
+import CookiePopup from '../components/CookiePopup'
 
 const Home = () => {
   return (
@@ -11,6 +12,7 @@ const Home = () => {
         <FoundersNote />
         <ServiceCard />
         <ContactForm />
+        <CookiePopup />
     </div>
   )
 }
