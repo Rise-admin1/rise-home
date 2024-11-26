@@ -12,8 +12,8 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
-import Logo from '../assets/logo.png';
-import { useNavigate, Router } from 'react-router-dom';
+import Logo from '../assets/logo.png'; // Assuming this is the logo image
+import { useNavigate } from 'react-router-dom';
 
 const styles = {
   appBar: {
@@ -43,7 +43,7 @@ const styles = {
   logo: {
     width: '100%', // Ensure the logo scales within the container
     height: '100%', // Ensure the logo scales proportionally
-    maxWidth: '100px', // Set a max size for the image
+    maxWidth: '100px', // Set a max size for the image on larger screens
     maxHeight: '100px',
     objectFit: 'contain', // Ensure image doesn't get distorted
     fontWeight: 600,
@@ -54,6 +54,11 @@ const styles = {
     '&:hover': {
       opacity: 0.8, // Adjust opacity on hover
       transform: 'scale(1.1)', // Optionally add a scale effect for logo on hover
+    },
+    // Responsive adjustments
+    '@media (max-width: 600px)': {
+      maxWidth: '80px',  // Reduce the size on mobile devices
+      maxHeight: '80px',
     },
   },
   navContainer: {
@@ -149,7 +154,7 @@ const Navbar = () => {
       <AppBar position="sticky" elevation={0} sx={styles.appBar}>
         <Toolbar sx={styles.toolbar}>
           <Box sx={styles.imageContainer}>
-          <img sx={styles.logo} src={Logo} alt="Logo" width={100} height={30} />
+            <img sx={styles.logo} src={Logo} alt="Logo" width={100} height={30} />
           </Box>
 
           <Box sx={styles.navContainer}>

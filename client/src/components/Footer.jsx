@@ -6,6 +6,7 @@ import Divider from '@mui/material/Divider';
 import { Facebook, LinkedIn } from '@mui/icons-material';
 import Logo from '../assets/logo.png';
 import { HashLink } from 'react-router-hash-link';
+import { Link } from 'react-router-dom';
 
 const styles = {
   footerContainer: {
@@ -106,12 +107,14 @@ function Footer() {
 
         {/* Social Media Icons */}
         <Box sx={styles.socialMedia}>
-          <IconButton sx={styles.socialIcon}>
+          {/* <IconButton sx={styles.socialIcon}>
             <Facebook />
-          </IconButton>
+          </IconButton> */}
+          <Link to={{ pathname: "https://ae.linkedin.com/company/right-intellectual-services-rise-portal-ltd" }} target="_blank">
           <IconButton sx={styles.socialIcon}>
             <LinkedIn />
           </IconButton>
+          </Link>
         </Box>
       </Box>
 

@@ -1,0 +1,178 @@
+/* EmblaCarousel.css */
+
+/* Container for the carousel */
+.embla {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.embla__viewport {
+    overflow: hidden;
+}
+
+.embla__container {
+    display: flex;
+    transition: transform 0.3s ease;
+}
+
+.embla__slide {
+    width: calc(33.33% - 16px); /* Default to 3 cards on large screens */
+    box-sizing: border-box;
+    display: flex;
+    justify-content: flex-start; /* Align content to the left */
+    align-items: flex-start; /* Align content to the top */
+    padding: 16px;
+    background-color: #333; /* Card background */
+    border-radius: 12px; /* Rounded corners */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Card shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    flex-shrink: 0; /* Prevent card from shrinking */
+    margin-right: 16px; /* Gap between cards */
+}
+
+.embla__slide:hover {
+    transform: scale(1.05); /* Hover effect to scale the card */
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3); /* Stronger shadow on hover */
+}
+
+/* Card content inside each slide */
+.embla__slide__content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align items to the left */
+    text-align: left; /* Left-align text */
+    color: #fff; /* White text */
+    width: 100%; /* Ensure content spans full width */
+}
+
+.embla__slide__image {
+    width: 100%;
+    height: 150px; /* Set fixed height for images */
+    overflow: hidden;
+    border-radius: 8px;
+    margin-bottom: 12px; /* Spacing between image and text */
+}
+
+.embla__slide__image img {
+    width: 100%; /* Adjust to cover the full container width */
+    height: 100%;
+    object-fit: cover; /* Ensure image is cropped correctly */
+}
+
+.embla__slide__text {
+    margin-top: 8px;
+}
+
+.embla__slide__text h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.embla__slide__text p {
+    font-size: 0.9rem;
+    color: #d1d1d1; /* Light gray text */
+    line-height: 1.4;
+}
+
+/* Controls container for previous/next buttons and autoplay */
+.embla__controls {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: center; /* Center the controls */
+    align-items: center; /* Vertically align the buttons */
+    transform: translateY(-50%);
+    gap: 20px; /* Space between the buttons */
+}
+
+/* Play/Stop button */
+.embla__play {
+    background-color: #ffffff;
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.embla__play:hover {
+    background-color: #ddd;
+}
+
+/* Previous and Next Buttons */
+.embla__buttons {
+    display: flex;
+    gap: 15px; /* Space between the Prev and Next buttons */
+}
+
+/* Previous Button */
+.embla__prev {
+    background-color: #ffffff;
+    padding: 10px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Next Button */
+.embla__next {
+    background-color: #ffffff;
+    padding: 10px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.embla__prev:hover,
+.embla__next:hover {
+    background-color: #ddd;
+}
+
+/* Media Queries for Responsiveness */
+
+/* For tablets (768px and up) */
+@media (max-width: 1024px) {
+    .embla__slide {
+        width: calc(50% - 16px); /* Show 2 cards on tablet */
+        margin-right: 16px; /* Keep the gap */
+    }
+
+    .embla__slide__image {
+        height: 120px; /* Adjust image size for smaller screens */
+    }
+
+    .embla__slide__text h3 {
+        font-size: 1rem; /* Smaller title text */
+    }
+
+    .embla__slide__text p {
+        font-size: 0.85rem; /* Smaller paragraph text */
+    }
+}
+
+/* For mobile screens (up to 767px) */
+@media (max-width: 767px) {
+    .embla__slide {
+        width: calc(100% - 16px); /* Show 1 card per slide on mobile */
+        margin-right: 0; /* No margin between slides */
+    }
+
+    .embla__slide__image {
+        height: 200px; /* Adjust image height for mobile */
+    }
+
+    .embla__slide__text h3 {
+        font-size: 1rem; /* Smaller title text */
+    }
+
+    .embla__slide__text p {
+        font-size: 0.8rem; /* Smaller paragraph text */
+    }
+}
