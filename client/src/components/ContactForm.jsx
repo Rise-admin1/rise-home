@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
-import {Link} from 'react-router-dom'
+import axios from 'axios';
 
-// Styles configuration
+// Styles configuration (remains the same as you provided)
 const styles = {
   container: {
     display: 'flex',
@@ -14,7 +14,7 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     padding: 4,
-    backgroundColor: '#212121', // Blend with the dark theme
+    backgroundColor: '#212121',
     color: '#ffffff',
     textAlign: 'center',
     gap: 4,
@@ -26,10 +26,10 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     width: '90%',
-    maxWidth: '500px', // Ideal width for a clean UI
+    maxWidth: '500px',
     padding: 3,
     borderRadius: 4,
-    background: 'linear-gradient(to right, #333333, #212121)', // Blended background
+    background: 'linear-gradient(to right, #333333, #212121)',
     boxShadow: '0 4px 20px rgba(0, 0, 0, 0.5)',
     gap: 3,
   },
@@ -80,52 +80,97 @@ const styles = {
 };
 
 function ContactForm() {
+  // State to manage form inputs
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [message, setMessage] = useState('');
+
+  // Handle form submission
+  const handleSend = async () => {
+    // Prepare data for submission
+    const formData = {
+      name,
+      email,
+      phone,
+      message,
+    };
+
+    try {
+      // Sending data to backend
+      const response = await axios.post('http://localhost:3001/api/rise/send-contact', formData);
+      console.log(resp.data,'response');
+      
+
+      // Handle success response (e.g., show a success message)
+      console.log('Form submitted successfully:', response.data);
+
+      // Reset the form (optional)
+      setName('');
+      setEmail('');
+      setPhone('');
+      setMessage('');
+
+      // You can also display a success message to the user here
+    } catch (error) {
+      // Handle error (e.g., show an error message)
+      console.error('Error sending contact form:', error);
+    }
+  };
+
   return (
-      <section id="contact">
-    <Box sx={styles.container} id >
+    <section id="contact">
+      <Box sx={styles.container}>
+        {/* Title */}
+        <Typography variant="h4" sx={styles.title}>
+          Get in Touch
+        </Typography>
 
-      {/* Title */}
-      <Typography variant="h4" sx={styles.title}>
-        Get in Touch
-      </Typography>
+        {/* Form */}
+        <Paper elevation={3} sx={styles.formContainer}>
+          <TextField
+            label="Name"
+            variant="outlined"
+            sx={styles.textField}
+            required
+            value={name}
+            onChange={(e) => setName(e.target.value)} // Capture name input
+          />
+          <TextField
+            label="Email"
+            type="email"
+            variant="outlined"
+            sx={styles.textField}
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)} // Capture email input
+          />
+          <TextField
+            label="Phone Number"
+            type="tel"
+            variant="outlined"
+            sx={styles.textField}
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)} // Capture phone input
+          />
+          <TextField
+            label="Message"
+            variant="outlined"
+            multiline
+            rows={4}
+            sx={styles.textField}
+            required
+            value={message}
+            onChange={(e) => setMessage(e.target.value)} // Capture message input
+          />
+          <Button onClick={handleSend} sx={styles.button}>
+            Submit
+          </Button>
+        </Paper>
 
-      {/* Form */}
-      <Paper elevation={3} sx={styles.formContainer}>
-        <TextField
-          label="Name"
-          variant="outlined"
-          sx={styles.textField}
-          required
-        />
-        <TextField
-          label="Email"
-          type="email"
-          variant="outlined"
-          sx={styles.textField}
-          required
-        />
-        <TextField
-          label="Phone Number"
-          type="tel"
-          variant="outlined"
-          sx={styles.textField}
-        />
-        <TextField
-          label="Message"
-          variant="outlined"
-          multiline
-          rows={4}
-          sx={styles.textField}
-          required
-        />
-        <Button type="submit" sx={styles.button}>
-          Submit
-        </Button>
-      </Paper>
-
-      {/* Footer Text */}
-    </Box>
-      </section>
+        {/* Footer Text */}
+      </Box>
+    </section>
   );
 }
 
