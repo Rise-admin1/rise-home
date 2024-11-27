@@ -98,7 +98,7 @@ function ContactForm() {
 
     try {
       // Sending data to backend
-      const response = await axios.post('http://localhost:3001/api/rise/send-contact', formData);
+      const response = await axios.post('https://react-journal1.onrender.com/api/rise/send-contact', formData);
       console.log(resp.data,'response');
       
 
