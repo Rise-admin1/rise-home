@@ -3,6 +3,7 @@ import Home from "./pages/Home";
 import Footer from "./components/Footer";
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom'
 import Careers from "./pages/Careers";
+import UnderConstruction from "./components/UnderConstruction";
 
 function App() {
 
@@ -29,6 +30,10 @@ function App() {
       {
         path: "/careers",
         element: <Careers />,
+      },
+      {
+        path: "/app-update",
+        element: <UnderConstruction />,
       },
 
     ]

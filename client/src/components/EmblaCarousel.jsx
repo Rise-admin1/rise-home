@@ -1,20 +1,21 @@
-import React, { useCallback, useEffect, useState } from 'react'
-import useEmblaCarousel from 'embla-carousel-react'
-import AutoScroll from 'embla-carousel-auto-scroll'
+import React, { useCallback, useEffect, useState } from 'react';
+import useEmblaCarousel from 'embla-carousel-react';
+import AutoScroll from 'embla-carousel-auto-scroll';
 import {
   NextButton,
   PrevButton,
-  usePrevNextButtons
-} from './EmblaCarouselArrowButtons'
+  usePrevNextButtons,
+} from './EmblaCarouselArrowButtons';
 import './EmblaCarousel.css';
 
-// EmblaCarousel Component (JSX)
-
 const EmblaCarousel = ({ slides, options }) => {
-  const [emblaRef, emblaApi] = useEmblaCarousel(options, [
-    AutoScroll({ playOnInit: true }) // Start autoplay when the website renders
-  ]);
-  const [isPlaying, setIsPlaying] = useState(true); // Automatically start as playing
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    options,
+    [
+      AutoScroll({ playOnInit: true, stopOnInteraction: false }), // Keep autoplay running even after interaction
+    ]
+  );
+  const [isPlaying, setIsPlaying] = useState(true);
 
   const {
     prevBtnDisabled,
@@ -23,31 +24,13 @@ const EmblaCarousel = ({ slides, options }) => {
     onNextButtonClick,
   } = usePrevNextButtons(emblaApi);
 
-  const onButtonAutoplayClick = useCallback(
-    (callback) => {
-      const autoScroll = emblaApi?.plugins()?.autoScroll;
-      if (!autoScroll) return;
-
-      const resetOrStop =
-        autoScroll.options.stopOnInteraction === false
-          ? autoScroll.reset
-          : autoScroll.stop;
-
-      resetOrStop();
-      callback();
-    },
-    [emblaApi]
-  );
-
   const toggleAutoplay = useCallback(() => {
     const autoScroll = emblaApi?.plugins()?.autoScroll;
     if (!autoScroll) return;
 
-    const playOrStop = autoScroll.isPlaying()
-      ? autoScroll.stop
-      : autoScroll.play;
+    const playOrStop = autoScroll.isPlaying() ? autoScroll.stop : autoScroll.play;
     playOrStop();
-    setIsPlaying(autoScroll.isPlaying()); // Update the state based on play status
+    setIsPlaying(autoScroll.isPlaying());
   }, [emblaApi]);
 
   useEffect(() => {
@@ -67,15 +50,22 @@ const EmblaCarousel = ({ slides, options }) => {
         <div className="embla__container">
           {slides.map((service, index) => (
             <div className="embla__slide" key={index}>
-              <div className="embla__slide__content">
-                <div className="embla__slide__image">
-                  <img src={service.image} alt={service.title} />
+              <button
+                className="embla__slide__button"
+                onClick={() => {
+                  window.location.href = service.link ; // Redirect to the link
+                }}
+              >
+                <div className="embla__slide__content">
+                  <div className="embla__slide__image">
+                    <img src={service.image} alt={service.title} />
+                  </div>
+                  <div className="embla__slide__text">
+                    <h3>{service.title}</h3>
+                    <p>{service.description}</p>
+                  </div>
                 </div>
-                <div className="embla__slide__text">
-                  <h3>{service.title}</h3>
-                  <p>{service.description}</p>
-                </div>
-              </div>
+              </button>
             </div>
           ))}
         </div>
@@ -84,18 +74,14 @@ const EmblaCarousel = ({ slides, options }) => {
       <div className="embla__controls">
         <div className="embla__buttons">
           <PrevButton
-            onClick={() => onButtonAutoplayClick(onPrevButtonClick)}
+            onClick={() => emblaApi?.scrollPrev()}
             disabled={prevBtnDisabled}
           />
           <NextButton
-            onClick={() => onButtonAutoplayClick(onNextButtonClick)}
+            onClick={() => emblaApi?.scrollNext()}
             disabled={nextBtnDisabled}
           />
         </div>
-
-        {/* <button className="embla__play" onClick={toggleAutoplay} type="button">
-          {isPlaying ? 'Stop' : 'Start'}
-        </button> */}
       </div>
     </div>
   );
