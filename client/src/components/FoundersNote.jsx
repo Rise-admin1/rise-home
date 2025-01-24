@@ -122,7 +122,7 @@ function FoundersNote() {
         {/* Heading Section */}
         <Box sx={styles.headingContainer}>
           <Typography variant="h2" sx={styles.heading}>
-            Founders Note
+            Founder's Note
           </Typography>
           <Divider sx={styles.divider} />
         </Box>
