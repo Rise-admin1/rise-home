@@ -53,7 +53,7 @@ const EmblaCarousel = ({ slides, options }) => {
               <button
                 className="embla__slide__button"
                 onClick={() => {
-                  window.location.href = service.link ; // Redirect to the link
+                  window.open(service.link, '_blank'); // Opens the link in a new tab
                 }}
               >
                 <div className="embla__slide__content">
