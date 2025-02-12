@@ -119,15 +119,16 @@ function Footer() {
 
         {/* Social Media Icons */}
         <Box sx={styles.socialMedia}>
-          {/* <IconButton sx={styles.socialIcon}>
-            <Facebook />
-          </IconButton> */}
-          <Link to={{ pathname: "https://ae.linkedin.com/company/right-intellectual-services-rise-portal-ltd" }} target="_blank">
-            <IconButton sx={styles.socialIcon}>
-              <LinkedIn />
-            </IconButton>
-          </Link>
-        </Box>
+  <a 
+    href="https://ae.linkedin.com/company/right-intellectual-services-rise-portal-ltd" 
+    target="_blank" 
+    rel="noopener noreferrer"
+  >
+    <IconButton sx={styles.socialIcon}>
+      <LinkedIn />
+    </IconButton>
+  </a>
+</Box>
       </Box>
 
       {/* Divider */}
