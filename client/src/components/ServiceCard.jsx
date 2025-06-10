@@ -148,7 +148,7 @@ const services = [
     icon: <CodeIcon sx={styles.serviceIcon} />,
     image: 'https://i.postimg.cc/RVsynkV8/Whats-App-Image-2024-11-25-at-2-23-59-PM-2.jpg',
     description: `CoachAcadem revolutionizes student-tutor interaction through its innovative app, connecting learners with skilled educators in an intuitive, dynamic environment. Students can easily find tutors for various subjects, schedule sessions, and access personalized learning plans. Tutors benefit from tools that simplify lesson management and enhance communication. Designed to promote effective learning outcomes, CoachAcadem fosters collaboration and makes quality education accessible anytime, anywhere. Whether mastering a challenging topic or preparing for exams, users gain the guidance and support needed for academic success. CoachAcadem bridges the gap between education and technology for a seamless learning experience.`,
-    link:'/app-update'
+    link:'https://coachacadem.ae/'
   },
   {
     title: 'CorpInk',
