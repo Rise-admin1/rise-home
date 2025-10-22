@@ -176,7 +176,7 @@ const services = [
     icon: <CloudIcon sx={styles.serviceIcon} />,
     image: 'https://i.postimg.cc/25xTWt4M/Whats-App-Image-2024-11-25-at-2-56-10-PM.jpg',
     description: `SafariBooks brings stories and knowledge to life with its extensive library of audiobooks, catering to diverse tastes and interests. From gripping fiction and timeless classics to insightful self-help and business guides, SafariBooks ensures there’s something for everyone. Ideal for busy professionals, avid learners, and casual readers, the platform allows users to enjoy immersive storytelling and educational content on the go. With top-notch narrators and user-friendly features, SafariBooks transforms time spent commuting or relaxing into enriching experiences. Explore, listen, and discover a world of knowledge and entertainment, all at your fingertips with SafariBooks.`,
-    link:'/app-update'
+    link:'https://safbooks.com/'
   },
   {
     title: 'Scientific Journals Portal',
@@ -190,7 +190,7 @@ const services = [
     icon: <CloudIcon sx={styles.serviceIcon} />,
     image: 'https://i.postimg.cc/5y675mgJ/Whats-App-Image-2024-11-25-at-2-38-41-PM.jpg',
     description: `Velo is a global leader in shipping and logistics, specializing in seamless transportation solutions for businesses of all sizes. With an extensive network spanning continents, Velo ensures reliable delivery across air, sea, and land, meeting the demands of modern commerce. The company offers tailored services, including freight forwarding, supply chain management, and customs clearance, designed to optimize efficiency and reduce costs. By leveraging advanced tracking systems and a commitment to sustainability, Velo provides clients with transparency, speed, and eco-friendly options. From local deliveries to international shipments, Velo empowers businesses to connect markets and drive global growth effortlessly.`,
-    link:'/app-update'
+    link:'https://velointl.com/'
   },
   {
     title: 'Right Writing Dubai (AE)',
