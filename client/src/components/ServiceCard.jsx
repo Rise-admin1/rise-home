@@ -86,11 +86,10 @@ const styles = {
     },
   },
   cardMedia: {
-    width: 200, // Set a fixed width
-    height: 200, // Set a fixed height, same as width
+    width: 450, // Set a fixed width
+    height: 300, // Set a fixed height, same as width
     position: 'relative',
     overflow: 'hidden',
-    borderRadius: '50%', // Create circular shape
     margin: '0 auto', // Center horizontally
     display: 'flex', // Enable flexbox centering
     justifyContent: 'center', // Center image horizontally
