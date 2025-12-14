@@ -5,6 +5,7 @@ import Avatar from '@mui/material/Avatar';
 import { Paper } from '@mui/material';
 import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
 import Divider from '@mui/material/Divider';
+import MichaelImg from '../assets/founders-image.webp';
 
 const styles = {
   wrapper: {
@@ -51,20 +52,30 @@ const styles = {
     gap: { xs: 2, md: 6 },
   },
   imageContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    gap: 2,
-    flex: { xs: '1', md: '0 0 250px' },
+    display: 'none', // Hidden - image now used as watermark
   },
   contentContainer: {
     flex: 1,
     position: 'relative',
     zIndex: 1,
+    overflow: 'hidden',
+  },
+  watermarkImage: {
+    position: 'absolute',
+    top: '50%',
+    right: '0%',
+    transform: 'translateY(-50%)',
+    width: { xs: '400px', md: '600px' },
+    height: 'auto',
+    maxHeight: '100%',
+    opacity: 0.35,
+    zIndex: 0,
+    pointerEvents: 'none',
+    objectFit: 'contain',
   },
   avatar: {
     width: { xs: 120, md: 200 },
-    height: { xs: 120, md: 240 },
+    height: { xs: 120, md: 280 },
     border: '4px solid #333333',
     boxShadow: '0 8px 24px rgba(0, 0, 0, 0.4)',
     transition: 'transform 0.3s ease-in-out',
@@ -87,6 +98,8 @@ const styles = {
     lineHeight: 1.8,
     letterSpacing: '0.3px',
     marginBottom: 2,
+    position: 'relative',
+    zIndex: 2,
     '& .MuiTypography-root': {
       marginBottom: 2,
     },
@@ -97,6 +110,8 @@ const styles = {
     flexDirection: 'column',
     alignItems: { xs: 'center', md: 'flex-end' },
     gap: 0.5,
+    position: 'relative',
+    zIndex: 2,
   },
   signature: {
     fontWeight: 600,
@@ -133,20 +148,30 @@ function FoundersNote() {
           <Box sx={styles.imageContainer}>
             <Avatar
               alt="Michael Harun Mugenya"
-              src="https://i.postimg.cc/dVJmRB4y/Whats-App-Image-2024-11-25-at-2-56-15-PM.jpg"
+              src={MichaelImg}
               sx={styles.avatar}
             />
           </Box>
 
           {/* Text Section */}
           <Box sx={styles.contentContainer}>
+            {/* Watermark Image */}
+            <Box
+              component="img"
+              src={MichaelImg}
+              alt="Michael Harun Mugenya"
+              sx={styles.watermarkImage}
+            />
             <Box sx={styles.content}>
               <Typography paragraph>
-                "As a Kenyan entrepreneur, my journey has been one defined by unwavering dedication, strategic foresight, and a relentless passion for innovation. After years of dedicated service, I realized that the path to creating meaningful change and impact lies not just in contributing to others' success but in creating my own legacy—one that empowers organizations, individuals, and entire industries.
+                RISE Ltd.'s journey has been one defined by unwavering dedication, strategic foresight, and a relentless passion for innovation. Through years of premium, accessible and dedicated service, we continually realize that the path to creating meaningful change and impact lies in contributing to others' success and building a legacy. A legacy of empowering organizations, individuals, and entire industries.
               </Typography>
               
               <Typography paragraph>
-                This vision led to the establishment of my company in Dubai, UAE—a global hub for innovation and progress. With a diverse range of verticals, we are driven by a shared purpose: to help businesses and individuals harness the power of information, technology, and creativity.
+                This vision scaffold's RISE's operations in Dubai, UAE — a global hub for innovation and progress. With a diverse range of verticals, we are driven by a shared purpose: to help businesses and individuals harness the power of information, technology, and creativity.
+              </Typography>
+              
+              <Typography paragraph>
                 At the heart of our company lies a commitment to excellence across all our sectors—content creation, research and development, data intelligence and analysis, education technology, logistics technology, and audiobooks. These verticals, while distinct, are united by our core belief that transformative ideas can come to life when combined with advanced technology and insightful research.
               </Typography>
               
@@ -154,9 +179,9 @@ function FoundersNote() {
                 Our academic and corporate writing content creation services aim to tell stories that resonate, inspire and accelerate audience reception and appreciation. Through research and development, we focus on creating scalable solutions that push the boundaries of what's possible in education and business. With data intelligence, we seek to collect, analyse and turn raw information into actionable insights, empowering businesses to make informed decisions. In education technology, we envision a world where learning is accessible, engaging, and personalized for all. Our work in logistics technology strives to bring efficiency and innovation to global supply chains, while our audiobooks serve as a bridge between knowledge and the listener's ear, expanding horizons one story at a time.
               </Typography>
               
-              <Typography>
-                As we move forward, our company stands as a testament to the power of vision, hard work, and strategic planning. From my roots in Kenya to the heart of Dubai, our mission remains clear: to create opportunities, drive growth, and ultimately, make a lasting impact on the world.
-                Together with our dedicated team, we are excited to shape the future of technology, innovation, and education, while continuously pushing the boundaries of what's possible."
+              <Typography paragraph>
+                As we move forward, our company stands as a testament to the power of vision, hard work, and strategic planning. Rooted in Kenya's resilient spirit and founded in the heart of Dubai, our mission remains clear: to create opportunities, drive growth, and ultimately, make a lasting impact on the world.
+                Together with our dedicated team, we are excited to shape the future of technology, innovation, business and education, continuously pushing the boundaries of what's possible, intellectually.
               </Typography>
             </Box>
 
@@ -169,7 +194,7 @@ function FoundersNote() {
                 Founder & CEO
               </Typography>
               <Typography sx={styles.companyName}>
-                RISE Ltd
+                RISE Ltd.
               </Typography>
             </Box>
           </Box>
