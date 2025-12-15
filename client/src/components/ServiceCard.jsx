@@ -77,7 +77,8 @@ const styles = {
     borderRadius: 2,
     boxShadow: '0 8px 24px var(--shadow-light)',
     color: 'var(--text-primary)',
-    textAlign: 'center',
+    textAlign: 'left',
+    border: '1px solid var(--border-color)',
     transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
     overflow: 'hidden',
     '&:hover': {
@@ -85,46 +86,33 @@ const styles = {
       boxShadow: '0 12px 32px var(--shadow-light)',
     },
   },
-  cardMedia: {
-    width: 450, // Set a fixed width
-    height: 300, // Set a fixed height, same as width
-    position: 'relative',
-    overflow: 'hidden',
-    margin: '0 auto', // Center horizontally
-    display: 'flex', // Enable flexbox centering
-    justifyContent: 'center', // Center image horizontally
-    alignItems: 'center', // Center image vertically
-    '& img': {
-      objectFit: 'contain', // Ensures the image covers the circle without distorting
-      width: '100%', // Ensure the image takes up the full width of the container
-      height: '100%', // Ensure the image takes up the full height of the container
-    },
-    '&::after': {
-      content: '""',
-      position: 'absolute',
-      bottom: 0,
-      left: 0,
-      right: 0,
-      height: '40%',
-      background: 'linear-gradient(to top, var(--bg-card), transparent)',
-    },
+  headerRow: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: 2,
+    marginBottom: 2,
   },
-  
-  
+  logo: {
+    width: { xs: 72, sm: 88, md: 96 },
+    height: { xs: 72, sm: 88, md: 96 },
+    borderRadius: 3,
+    objectFit: 'contain',
+    backgroundColor: 'var(--bg-secondary)',
+    padding: 1.25,
+    boxShadow: '0 4px 12px var(--shadow-light)',
+  },
   cardContent: {
-    padding: 3,
+    padding: { xs: 2.5, md: 3 },
     display: 'flex',
     flexDirection: 'column',
     gap: 2,
   },
   cardTitle: {
     fontWeight: 700,
-    fontSize: '1.4rem',
-    marginBottom: 1,
-    display: 'flex',
-    alignItems: 'center',
-    gap: 1.5,
+    fontSize: '1.3rem',
+    marginBottom: 0,
     color: 'var(--text-primary)',
+    letterSpacing: '0.01em',
   },
   cardText: {
     fontSize: '1rem',
@@ -299,17 +287,18 @@ function ServiceCard() {
                   sx={{ ...styles.card, ...styles.swiperCard }}
                   onClick={() => window.open(service.link, '_blank')}
                 >
-                  <CardMedia
-                    component="img"
-                    alt={service.title}
-                    image={service.image}
-                    sx={styles.cardMedia}
-                  />
                   <CardContent sx={styles.cardContent}>
-                    <Typography variant="h6" sx={styles.cardTitle}>
-                      {service.icon}
-                      {service.title}
-                    </Typography>
+                    <Box sx={styles.headerRow}>
+                      <Box
+                        component="img"
+                        src={service.image}
+                        alt={service.title}
+                        sx={styles.logo}
+                      />
+                      <Typography variant="h6" sx={styles.cardTitle}>
+                        {service.title}
+                      </Typography>
+                    </Box>
                     <Typography variant="body2" sx={styles.cardText}>
                       {service.description}
                     </Typography>
