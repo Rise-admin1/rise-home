@@ -14,8 +14,8 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     padding: 4,
-    backgroundColor: '#212121',
-    color: '#ffffff',
+    backgroundColor: 'var(--bg-primary)',
+    color: 'var(--text-primary)',
     textAlign: 'center',
     gap: 4,
     width: '100%',
@@ -29,29 +29,29 @@ const styles = {
     maxWidth: '500px',
     padding: 3,
     borderRadius: 4,
-    background: 'linear-gradient(to right, #333333, #212121)',
-    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.5)',
+    background: 'var(--bg-card)',
+    boxShadow: '0 4px 20px var(--shadow-light)',
     gap: 3,
   },
   title: {
     fontSize: '2rem',
     fontWeight: 'bold',
-    color: '#f5f5f5',
+    color: 'var(--text-primary)',
   },
   textField: {
     width: '100%',
     '& .MuiInputBase-root': {
-      color: '#ffffff',
+      color: 'var(--text-primary)',
     },
     '& .MuiInputLabel-root': {
-      color: '#d1d1d1',
+      color: 'var(--text-tertiary)',
     },
     '& .MuiOutlinedInput-root': {
       '& fieldset': {
-        borderColor: '#444444',
+        borderColor: 'var(--border-color)',
       },
       '&:hover fieldset': {
-        borderColor: '#ffffff',
+        borderColor: 'var(--text-tertiary)',
       },
       '&.Mui-focused fieldset': {
         borderColor: '#f50057',
@@ -74,7 +74,7 @@ const styles = {
   },
   footerText: {
     marginTop: 2,
-    color: '#d1d1d1',
+    color: 'var(--text-tertiary)',
     fontSize: '0.9rem',
   },
 };

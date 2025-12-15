@@ -10,14 +10,14 @@ import { Link } from 'react-router-dom';
 
 const styles = {
   footerContainer: {
-    backgroundColor: '#121212',
-    color: '#ffffff',
+    backgroundColor: 'var(--bg-primary)',
+    color: 'var(--text-primary)',
     padding: '20px 40px',
     textAlign: 'center',
     display: 'flex',
     flexDirection: 'column',
     gap: 3,
-    boxShadow: '0 -4px 10px rgba(0, 0, 0, 0.3)',
+    boxShadow: '0 -4px 10px var(--shadow-light)',
   },
   footerTop: {
     display: 'flex',
@@ -33,7 +33,7 @@ const styles = {
     flexDirection: 'row',
     gap: 1,
     fontSize: '0.9rem',
-    color: '#d1d1d1',
+    color: 'var(--text-tertiary)',
   },
   socialMedia: {
     display: 'flex',
@@ -42,7 +42,7 @@ const styles = {
     gap: 1,
   },
   socialIcon: {
-    color: '#ffffff',
+    color: 'var(--text-primary)',
     transition: 'color 0.3s ease',
     '&:hover': {
       color: '#1877F2',
@@ -51,12 +51,12 @@ const styles = {
   footerBottom: {
     marginTop: 2,
     fontSize: '0.8rem',
-    color: '#b3b3b3',
+    color: 'var(--text-muted)',
   },
   addressSection: {
     marginTop: '20px',
     fontSize: '0.85rem',
-    color: '#d1d1d1',
+    color: 'var(--text-tertiary)',
     textAlign: 'center',
     lineHeight: 1.6,
     display: 'flex',
@@ -64,7 +64,7 @@ const styles = {
     gap: 1,
   },
   addressItem: {
-    color: '#d1d1d1',
+    color: 'var(--text-tertiary)',
     fontSize: '0.9rem',
   },
   imageContainer: {
@@ -132,7 +132,7 @@ function Footer() {
       </Box>
 
       {/* Divider */}
-      <Divider sx={{ backgroundColor: '#444', marginY: 2 }} />
+      <Divider sx={{ backgroundColor: 'var(--border-color)', marginY: 2 }} />
 
       {/* Address, Phone, and Email Section */}
       <Box sx={styles.addressSection}>
@@ -143,7 +143,7 @@ function Footer() {
           Phone: +971 5677 91074
         </Typography>
         <Typography sx={styles.addressItem}>
-          Email: <a href="mailto:info@rightintellectual.ae" style={{ color: '#d1d1d1', textDecoration: 'none' }}>info@rightintellectual.ae</a>
+          Email: <a href="mailto:info@rightintellectual.ae" style={{ color: 'var(--text-tertiary)', textDecoration: 'none' }}>info@rightintellectual.ae</a>
         </Typography>
       </Box>
 

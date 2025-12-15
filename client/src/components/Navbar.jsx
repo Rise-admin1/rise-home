@@ -17,8 +17,8 @@ import { useNavigate } from 'react-router-dom';
 
 const styles = {
   appBar: {
-    backgroundColor: '#121212',
-    borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
+    backgroundColor: 'var(--bg-primary)',
+    borderBottom: '1px solid var(--border-color)',
   },
   toolbar: {
     display: 'flex',
@@ -67,23 +67,23 @@ const styles = {
     gap: '1rem',
   },
   navButton: {
-    color: '#fff',
+    color: 'var(--text-primary)',
     fontSize: '0.95rem',
     textTransform: 'none',
     padding: '6px 16px',
     borderRadius: 1,
     transition: 'all 0.2s ease',
     '&:hover': {
-      backgroundColor: 'rgba(255, 255, 255, 0.08)',
+      backgroundColor: 'var(--bg-tertiary)',
       transform: 'translateY(-1px)',
     },
     '&.active': {
-      backgroundColor: 'rgba(255, 255, 255, 0.12)',
+      backgroundColor: 'var(--bg-tertiary)',
     },
   },
   menuButton: {
     display: { xs: 'flex', md: 'none' },
-    color: '#fff',
+    color: 'var(--text-primary)',
     padding: '8px',
     transition: 'transform 0.2s ease',
     '&:hover': {
@@ -93,8 +93,8 @@ const styles = {
   drawer: {
     '& .MuiDrawer-paper': {
       width: 240,
-      backgroundColor: '#1a1a1a',
-      borderLeft: '1px solid rgba(255, 255, 255, 0.05)',
+      backgroundColor: 'var(--bg-secondary)',
+      borderLeft: '1px solid var(--border-color)',
     },
   },
   drawerHeader: {
@@ -102,7 +102,7 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'space-between',
     padding: '1rem',
-    borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
+    borderBottom: '1px solid var(--border-color)',
   },
   drawerList: {
     padding: '1rem 0',
@@ -110,16 +110,16 @@ const styles = {
   drawerItem: {
     padding: '0.5rem 1.5rem',
     '&:hover': {
-      backgroundColor: 'rgba(255, 255, 255, 0.05)',
+      backgroundColor: 'var(--bg-tertiary)',
     },
   },
   drawerItemText: {
     fontSize: '1rem',
     fontWeight: 500,
-    color: '#fff',
+    color: 'var(--text-primary)',
     transition: 'color 0.2s ease',
     '&:hover': {
-      color: '#f0f0f0',
+      color: 'var(--text-secondary)',
     },
   },
 };
@@ -194,7 +194,7 @@ const Navbar = () => {
           </Typography>
           <IconButton
             onClick={handleDrawerToggle}
-            sx={{ color: '#fff' }}
+            sx={{ color: 'var(--text-primary)' }}
             aria-label="close menu"
           >
             <CloseIcon />

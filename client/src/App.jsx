@@ -9,7 +9,7 @@ function App() {
 
   const Layout = () => {
     return (
-      <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" ,backgroundColor:'#121212'}}>
+      <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" ,backgroundColor:'var(--bg-primary)'}}>
         <Navbar />
         <div style={{ flex: 1 }}>
           <Outlet className='' />

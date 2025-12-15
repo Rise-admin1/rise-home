@@ -19,7 +19,7 @@ import 'swiper/css/pagination';
 
 const styles = {
   wrapper: {
-    backgroundColor: '#1a1a1a',
+    backgroundColor: 'var(--bg-primary)',
     padding: { xs: 2, sm: 4, md: 6 },
 
   },
@@ -29,8 +29,8 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     padding: { xs: 2, sm: 4 },
-    backgroundColor: '#212121',
-    color: '#ffffff',
+    backgroundColor: 'var(--bg-secondary)',
+    color: 'var(--text-primary)',
     textAlign: 'center',
     gap: 6,
     borderRadius: 2,
@@ -49,14 +49,14 @@ const styles = {
     fontWeight: 800,
     letterSpacing: '0.02em',
     textTransform: 'uppercase',
-    background: 'linear-gradient(45deg, #ffffff 30%, #d1d1d1 90%)',
+    background: 'linear-gradient(45deg, var(--text-primary) 30%, var(--text-tertiary) 90%)',
     WebkitBackgroundClip: 'text',
     WebkitTextFillColor: 'transparent',
   },
   divider: {
     width: '80px',
     height: '4px',
-    backgroundColor: '#d1d1d1',
+    backgroundColor: 'var(--divider-color)',
     margin: '16px auto',
     borderRadius: '2px',
   },
@@ -73,16 +73,16 @@ const styles = {
     padding: { xs: 2, sm: 3 },
   },
   card: {
-    backgroundColor: '#333333',
+    backgroundColor: 'var(--bg-card)',
     borderRadius: 2,
-    boxShadow: '0 8px 24px rgba(0, 0, 0, 0.2)',
-    color: '#ffffff',
+    boxShadow: '0 8px 24px var(--shadow-light)',
+    color: 'var(--text-primary)',
     textAlign: 'center',
     transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
     overflow: 'hidden',
     '&:hover': {
       transform: 'translateY(-8px)',
-      boxShadow: '0 12px 32px rgba(0, 0, 0, 0.3)',
+      boxShadow: '0 12px 32px var(--shadow-light)',
     },
   },
   cardMedia: {
@@ -106,7 +106,7 @@ const styles = {
       left: 0,
       right: 0,
       height: '40%',
-      background: 'linear-gradient(to top, #333333, transparent)',
+      background: 'linear-gradient(to top, var(--bg-card), transparent)',
     },
   },
   
@@ -124,21 +124,22 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     gap: 1.5,
+    color: 'var(--text-primary)',
   },
   cardText: {
     fontSize: '1rem',
-    color: '#d1d1d1',
+    color: 'var(--text-tertiary)',
     lineHeight: 1.6,
     letterSpacing: '0.3px',
     textAlign:'left'
   },
   icon: {
-    color: '#d1d1d1',
+    color: 'var(--text-tertiary)',
     fontSize: '2rem',
     marginBottom: 2,
   },
   serviceIcon: {
-    color: '#d1d1d1',
+    color: 'var(--text-tertiary)',
     fontSize: '1.5rem',
   },
   swiperContainer: {
@@ -156,19 +157,19 @@ const styles = {
       height: 'auto',
     },
     '& .swiper-button-next, & .swiper-button-prev': {
-      color: '#d1d1d1',
+      color: 'var(--text-tertiary)',
       '&:after': {
         fontSize: '20px',
       },
       '&:hover': {
-        color: '#ffffff',
+        color: 'var(--text-primary)',
       },
     },
     '& .swiper-pagination-bullet': {
-      backgroundColor: '#d1d1d1',
+      backgroundColor: 'var(--text-tertiary)',
       opacity: 0.5,
       '&.swiper-pagination-bullet-active': {
-        backgroundColor: '#ffffff',
+        backgroundColor: 'var(--text-primary)',
         opacity: 1,
       },
     },
@@ -248,7 +249,6 @@ function ServiceCard() {
     <Paper elevation={8} sx={styles.wrapper}>
       <Box sx={styles.container}>
         <Box sx={styles.titleSection}>
-          <AutoAwesomeIcon sx={styles.icon} />
           <Typography variant="h2" sx={styles.title}>
             Our Brands
           </Typography>

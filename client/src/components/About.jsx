@@ -2,103 +2,86 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { Paper, Divider, Fade } from '@mui/material';
-import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 import GroupImg from '../assets/group.jpeg';
 
 const styles = {
   wrapper: {
-    backgroundColor: '#1a1a1a',
-    padding: { xs: 3, md: 6 },
+    backgroundColor: 'var(--bg-primary)',
+    padding: { xs: 2, md: 4 },
   },
   container: {
-    display: 'flex',
-    flexDirection: { xs: 'column', md: 'row' }, // Row on large screens, column on small screens
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#212121',
-    color: '#ffffff',
-    padding: { xs: 4, md: 6 },
-    margin: 'auto',
-    textAlign: 'center',
     position: 'relative',
+    minHeight: { xs: '600px', md: '800px' },
+    borderRadius: 2,
     overflow: 'hidden',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: { xs: 'center', md: 'flex-end' },
   },
-  contentContainer: {
+  backgroundImage: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+    objectPosition: 'top center', // Show the top part of the image
+    zIndex: 0,
+  },
+  overlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    background: 'linear-gradient(to right, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.3) 1000%, rgba(0, 0, 0, 0.2) 100%)',
+    zIndex: 1,
+  },
+  contentWrapper: {
+    position: 'relative',
+    zIndex: 2,
+    width: { xs: '100%', md: '50%' },
+    padding: { xs: 3, md: 6 },
+    color: '#ffffff',
     display: 'flex',
     flexDirection: 'column',
-    gap: 4,
-    textAlign: 'center',
-    position: 'relative',
-    zIndex: 1,
-    flex: 1, // Ensures text container takes up available space
+    gap: { xs: 3, md: 4 },
   },
   headingContainer: {
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
+    alignItems: { xs: 'center', md: 'flex-start' },
     gap: 2,
   },
   heading: {
     fontWeight: 800,
-    fontSize: { xs: '2rem', md: '2.5rem' },
+    fontSize: { xs: '1.75rem', md: '2.5rem' },
     lineHeight: 1.4,
     letterSpacing: '0.02em',
     textTransform: 'uppercase',
-    background: 'linear-gradient(45deg, #ffffff 30%, #d1d1d1 90%)',
-    WebkitBackgroundClip: 'text',
-    WebkitTextFillColor: 'transparent',
+    color: '#ffffff',
   },
   divider: {
     width: '80px',
     height: '4px',
-    backgroundColor: '#d1d1d1',
-    margin: '16px auto',
+    backgroundColor: 'var(--divider-color)',
+    margin: { xs: '8px auto', md: '8px 0' },
+    borderRadius: '2px',
   },
   paragraphContainer: {
     display: 'flex',
     flexDirection: 'column',
     gap: 3,
-    maxWidth: '800px',
-    margin: '0 auto',
   },
   paragraph: {
-    fontSize: { xs: '0.8rem', md: '1.0rem' },
-    textAlign: 'left',
+    fontSize: { xs: '0.95rem', md: '1.1rem' },
+    textAlign: { xs: 'center', md: 'left' },
     lineHeight: 1.8,
-    color: '#d1d1d1',
-    margin: '0 auto',
+    color: '#ffffff',
     letterSpacing: '0.3px',
-    fontWeight: 300,
-    '&:first-of-type': {
-      marginTop: 2,
+    '& .MuiTypography-root': {
+      color: '#ffffff',
     },
-  },
-  icon: {
-    color: '#d1d1d1',
-    fontSize: '2rem',
-    marginBottom: 2,
-  },
-  decorativeLine: {
-    position: 'absolute',
-    width: '200px',
-    height: '200px',
-    border: '2px solid rgba(255,255,255,0.05)',
-    borderRadius: '50%',
-    top: -100,
-    right: -100,
-  },
-  imageContainer: {
-    flex: 1, // Ensure image takes available space next to content
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingLeft: { xs: 0, md: 4 }, // Add space between image and text on larger screens
-    paddingTop: { xs: 3, md: 0 },
-  },
-  image: {
-    width: '100%',
-    maxWidth: '400px', // Limit the width on larger screens
-    borderRadius: '8px',
   },
 };
 
@@ -108,8 +91,20 @@ function About() {
       <Fade in timeout={1000}>
         <Paper elevation={8} sx={styles.wrapper}>
           <Box sx={styles.container}>
-            {/* Content Section */}
-            <Box sx={styles.contentContainer}>
+            {/* Background Image */}
+            <Box
+              component="img"
+              src={GroupImg}
+              alt="Group of people"
+              sx={styles.backgroundImage}
+            />
+            
+            {/* Dark Overlay for Text Readability */}
+            <Box sx={styles.overlay} />
+
+            {/* Content Overlay */}
+            <Box sx={styles.contentWrapper}>
+              {/* Heading Section */}
               <Box sx={styles.headingContainer}>
                 <Typography variant="h2" sx={styles.heading}>
                   About Us
@@ -117,6 +112,7 @@ function About() {
                 <Divider sx={styles.divider} />
               </Box>
 
+              {/* Content Text */}
               <Box sx={styles.paragraphContainer}>
                 <Typography variant="body1" sx={styles.paragraph}>
                   Right Intellectual Services Enterprise (RISE) Portal Ltd. is a
@@ -142,15 +138,6 @@ function About() {
                   a legacy.
                 </Typography>
               </Box>
-            </Box>
-
-            {/* Image Section */}
-            <Box sx={styles.imageContainer}>
-              <img
-                src={GroupImg} // Adjust path as needed if assets is in public folder
-                alt="Group of people"
-                sx={styles.image}
-              />
             </Box>
           </Box>
         </Paper>

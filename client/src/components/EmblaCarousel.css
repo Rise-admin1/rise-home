@@ -24,9 +24,9 @@
     justify-content: flex-start; /* Align content to the left */
     align-items: flex-start; /* Align content to the top */
     padding: 16px;
-    background-color: #333; /* Card background */
+    background-color: #ffffff; /* Card background */
     border-radius: 12px; /* Rounded corners */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Card shadow */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Card shadow */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     flex-shrink: 0; /* Prevent card from shrinking */
     margin-right: 16px; /* Gap between cards */
@@ -34,7 +34,7 @@
 
 .embla__slide:hover {
     transform: scale(1.05); /* Hover effect to scale the card */
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3); /* Stronger shadow on hover */
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15); /* Stronger shadow on hover */
 }
 
 /* Card content inside each slide */
@@ -43,7 +43,7 @@
     flex-direction: column;
     align-items: flex-start; /* Align items to the left */
     text-align: left; /* Left-align text */
-    color: #fff; /* White text */
+    color: #212121; /* Dark text */
     width: 100%; /* Ensure content spans full width */
 }
 
@@ -73,7 +73,7 @@
 
 .embla__slide__text p {
     font-size: 0.9rem;
-    color: #d1d1d1; /* Light gray text */
+    color: #333333; /* Dark gray text */
     line-height: 1.4;
 }
 
