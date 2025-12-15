@@ -50,7 +50,7 @@ const styles = {
   headingContainer: {
     display: 'flex',
     flexDirection: 'column',
-    alignItems: { xs: 'center', md: 'flex-start' },
+    alignItems: 'flex-start',
     gap: 2,
   },
   heading: {
@@ -65,7 +65,7 @@ const styles = {
     width: '80px',
     height: '4px',
     backgroundColor: 'var(--divider-color)',
-    margin: { xs: '8px auto', md: '8px 0' },
+    margin: '8px 0',
     borderRadius: '2px',
   },
   paragraphContainer: {
@@ -75,7 +75,7 @@ const styles = {
   },
   paragraph: {
     fontSize: { xs: '0.95rem', md: '1.1rem' },
-    textAlign: { xs: 'center', md: 'left' },
+    textAlign: 'left',
     lineHeight: 1.8,
     color: '#ffffff',
     letterSpacing: '0.3px',
