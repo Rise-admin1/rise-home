@@ -10,29 +10,26 @@ import CodeIcon from '@mui/icons-material/Code';
 import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
 import BrushIcon from '@mui/icons-material/Brush';
 import CloudIcon from '@mui/icons-material/Cloud';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Autoplay, Pagination } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 
 const styles = {
   wrapper: {
     backgroundColor: 'var(--bg-primary)',
-    padding: { xs: 2, sm: 4, md: 6 },
-
+    padding: { xs: 1, sm: 4, md: 6 },
   },
   container: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: { xs: 2, sm: 4 },
+    padding: { xs: 1.5, sm: 4 },
     backgroundColor: 'var(--bg-secondary)',
     color: 'var(--text-primary)',
     textAlign: 'center',
-    gap: 6,
+    gap: { xs: 3, sm: 6 },
     borderRadius: 2,
     position: 'relative',
     overflow: 'hidden',
@@ -45,7 +42,7 @@ const styles = {
     marginBottom: 2,
   },
   title: {
-    fontSize: { xs: '2rem', md: '2.5rem' },
+    fontSize: { xs: '1.5rem', sm: '2rem', md: '2.5rem' },
     fontWeight: 800,
     letterSpacing: '0.02em',
     textTransform: 'uppercase',
@@ -80,46 +77,61 @@ const styles = {
     textAlign: 'left',
     border: '1px solid var(--border-color)',
     transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
-    overflow: 'hidden',
+    overflow: 'auto',
+    minHeight: { xs: 'auto', sm: '170px', md: '190px' },
+    height: 'auto',
+    width: { xs: '100%', sm: '600px', md: '750px' },
+    display: 'flex',
+    flexDirection: { xs: 'column', sm: 'row' },
     '&:hover': {
       transform: 'translateY(-8px)',
       boxShadow: '0 12px 32px var(--shadow-light)',
     },
   },
-  headerRow: {
+  imageSection: {
+    width: { xs: '100%', sm: '35%' },
+    height: { xs: '150px', sm: '100%' },
+    flexShrink: 0,
     display: 'flex',
     alignItems: 'center',
-    gap: 2,
-    marginBottom: 2,
+    justifyContent: 'center',
+    padding: { xs: 1.5, sm: 2, md: 2.5 },
+    backgroundColor: 'var(--bg-secondary)',
   },
   logo: {
-    width: { xs: 72, sm: 88, md: 96 },
-    height: { xs: 72, sm: 88, md: 96 },
-    borderRadius: 3,
+    width: '100%',
+    height: '100%',
+    maxWidth: { xs: '140px', sm: '160px', md: '180px' },
+    maxHeight: { xs: '140px', sm: '160px', md: '180px' },
     objectFit: 'contain',
-    backgroundColor: 'var(--bg-secondary)',
-    padding: 1.25,
-    boxShadow: '0 4px 12px var(--shadow-light)',
+    borderRadius: 2,
   },
-  cardContent: {
-    padding: { xs: 2.5, md: 3 },
+  contentSection: {
+    width: { xs: '100%', sm: '65%' },
+    flex: 1,
     display: 'flex',
     flexDirection: 'column',
-    gap: 2,
+    padding: { xs: 1.5, sm: 2.5, md: 3 },
+    gap: { xs: 0.5, sm: 1 },
+    justifyContent: { xs: 'flex-start', sm: 'center' },
+    overflow: 'visible',
+    height: '100%',
   },
   cardTitle: {
     fontWeight: 700,
-    fontSize: '1.3rem',
-    marginBottom: 0,
+    fontSize: { xs: '1.1rem', sm: '1.2rem', md: '1.3rem' },
+    marginBottom: { xs: 0.5, sm: 0 },
     color: 'var(--text-primary)',
     letterSpacing: '0.01em',
+    flexShrink: 0,
   },
   cardText: {
-    fontSize: '1rem',
+    fontSize: { xs: '0.85rem', sm: '0.9rem', md: '0.95rem' },
     color: 'var(--text-tertiary)',
-    lineHeight: 1.6,
+    lineHeight: { xs: 1.5, sm: 1.5 },
     letterSpacing: '0.3px',
-    textAlign:'left'
+    textAlign: 'left',
+    flex: 1,
   },
   icon: {
     color: 'var(--text-tertiary)',
@@ -130,39 +142,61 @@ const styles = {
     color: 'var(--text-tertiary)',
     fontSize: '1.5rem',
   },
-  swiperContainer: {
+  sliderContainer: {
     width: '100%',
-    padding: { xs: '20px 0', md: '40px 0' },
+    padding: { xs: '15px 0', md: '40px 0' },
     position: 'relative',
-    '& .swiper': {
-      paddingBottom: '50px',
+    '& .slick-slider': {
+      paddingBottom: { xs: '35px', md: '50px' },
+    },
+    '& .slick-slide': {
+      padding: { xs: '0 10px', sm: '0 20px', md: '0 40px' },
+      height: 'auto',
+      transition: 'opacity 0.3s ease',
+      '& > div': {
+        height: '100%',
+        display: 'flex',
+      },
+    },
+    '& .slick-list': {
+      margin: { xs: '0 -10px', sm: '0 -20px', md: '0 -40px' },
       overflow: 'visible',
     },
-    '& .swiper-wrapper': {
-      transitionTimingFunction: 'linear !important',
+    '& .slick-track': {
+      display: 'flex',
+      alignItems: 'stretch',
     },
-    '& .swiper-slide': {
-      height: 'auto',
-    },
-    '& .swiper-button-next, & .swiper-button-prev': {
-      color: 'var(--text-tertiary)',
-      '&:after': {
-        fontSize: '20px',
+    '& .slick-arrow': {
+      zIndex: 1,
+      display: { xs: 'none !important', sm: 'block' },
+      '&:before': {
+        color: 'var(--text-tertiary)',
+        fontSize: { xs: '20px', sm: '24px' },
       },
-      '&:hover': {
+      '&:hover:before': {
         color: 'var(--text-primary)',
       },
+      '&.slick-prev': {
+        left: { xs: '10px', sm: '-30px' },
+      },
+      '&.slick-next': {
+        right: { xs: '10px', sm: '-30px' },
+      },
     },
-    '& .swiper-pagination-bullet': {
-      backgroundColor: 'var(--text-tertiary)',
-      opacity: 0.5,
-      '&.swiper-pagination-bullet-active': {
-        backgroundColor: 'var(--text-primary)',
+    '& .slick-dots': {
+      bottom: { xs: '-30px', md: '-40px' },
+      '& li button:before': {
+        color: 'var(--text-tertiary)',
+        opacity: 0.5,
+        fontSize: { xs: '10px', md: '12px' },
+      },
+      '& li.slick-active button:before': {
+        color: 'var(--text-primary)',
         opacity: 1,
       },
     },
   },
-  swiperCard: {
+  sliderCard: {
     height: '100%',
     cursor: 'pointer',
   },
@@ -230,9 +264,50 @@ const services = [
 ];
 
 function ServiceCard() {
-  // Duplicate services multiple times for seamless infinite scroll
-  const duplicatedServices = [...services, ...services, ...services];
-  
+  const sliderSettings = {
+    dots: true,
+    infinite: true,
+    speed: 3000,
+    slidesToShow: 2,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 100,
+    pauseOnHover: false,
+    arrows: true,
+    cssEase: 'linear',
+    swipeToSlide: true,
+    touchMove: true,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          speed: 3000,
+          autoplaySpeed: 100,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          speed: 3000,
+          autoplaySpeed: 100,
+        },
+      },
+      {
+        breakpoint: 640,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          speed: 3000,
+          autoplaySpeed: 100,
+        },
+      },
+    ],
+  };
+
   return (
     <Paper elevation={8} sx={styles.wrapper}>
       <Box sx={styles.container}>
@@ -243,70 +318,34 @@ function ServiceCard() {
           <Divider sx={styles.divider} />
         </Box>
         
-        <Box sx={styles.swiperContainer}>
-          <Swiper
-            modules={[Navigation, Autoplay, Pagination]}
-            spaceBetween={24}
-            slidesPerView={1}
-            slidesPerGroup={1}
-            loop={true}
-            loopedSlides={services.length * 2}
-            loopAdditionalSlides={services.length * 2}
-            speed={19000}
-            autoplay={{
-              delay: 1,
-              disableOnInteraction: false,
-              pauseOnMouseEnter: false,
-              stopOnLastSlide: false,
-            }}
-            effect="slide"
-            cssMode={false}
-            allowTouchMove={true}
-            grabCursor={true}
-            pagination={{
-              clickable: true,
-            }}
-            navigation={true}
-            breakpoints={{
-              640: {
-                slidesPerView: 2,
-                slidesPerGroup: 2,
-              },
-              1024: {
-                slidesPerView: 3,
-                slidesPerGroup: 3,
-              },
-            }}
-            style={{
-              '--swiper-navigation-size': '24px',
-            }}
-          >
-            {duplicatedServices.map((service, index) => (
-              <SwiperSlide key={`${service.title}-${index}`}>
+        <Box sx={styles.sliderContainer}>
+          <Slider {...sliderSettings}>
+            {services.map((service, index) => (
+              <div key={`${service.title}-${index}`}>
                 <Card
-                  sx={{ ...styles.card, ...styles.swiperCard }}
+                  sx={{ ...styles.card, ...styles.sliderCard }}
                   onClick={() => window.open(service.link, '_blank')}
                 >
-                  <CardContent sx={styles.cardContent}>
-                    <Box sx={styles.headerRow}>
-                      <Box
-                        component="img"
-                        src={service.image}
-                        alt={service.title}
-                        sx={styles.logo}
-                      />
-                      <Typography variant="h6" sx={styles.cardTitle}>
-                        {service.title}
-                      </Typography>
-                    </Box>
+                  <Box sx={styles.imageSection}>
+                    <Box
+                      component="img"
+                      src={service.image}
+                      alt={service.title}
+                      sx={styles.logo}
+                    />
+                  </Box>
+                  <Box sx={styles.contentSection}>
+                    <Typography variant="h6" sx={styles.cardTitle}>
+                      {service.title}
+                    </Typography>
                     <Typography variant="body2" sx={styles.cardText}>
                       {service.description}
                     </Typography>
-                  </CardContent>
+                  </Box>
                 </Card>
-              </SwiperSlide>
+              </div>
             ))}
-          </Swiper>
+          </Slider>
         </Box>
       </Box>
     </Paper>
