@@ -151,7 +151,7 @@ const styles = {
       paddingBottom: { xs: '35px', md: '50px' },
     },
     '& .slick-slide': {
-      padding: { xs: '0 6px', sm: '0 8px', md: '0 8px', lg: '0 12px' },
+      padding: { xs: '0 6px', sm: '0 4px', md: '0 4px', lg: '0 3px' },
       height: 'auto',
       transition: 'opacity 0.3s ease',
       '& > div': {
@@ -160,7 +160,7 @@ const styles = {
       },
     },
     '& .slick-list': {
-      margin: { xs: '0 -6px', sm: '0 -8px', md: '0 -8px', lg: '0 -12px' },
+      margin: { xs: '0 -6px', sm: '0 -4px', md: '0 -4px', lg: '0 -3px' },
       overflow: 'visible',
     },
     '& .slick-track': {
