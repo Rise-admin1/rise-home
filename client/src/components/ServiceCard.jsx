@@ -18,7 +18,7 @@ import 'slick-carousel/slick/slick-theme.css';
 const styles = {
   wrapper: {
     backgroundColor: 'var(--bg-primary)',
-    padding: { xs: 1, sm: 4, md: 6 },
+    padding: { xs: 1, sm: 3, md: 4, lg: 6 },
   },
   container: {
     display: 'flex',
@@ -29,7 +29,7 @@ const styles = {
     backgroundColor: 'var(--bg-secondary)',
     color: 'var(--text-primary)',
     textAlign: 'center',
-    gap: { xs: 3, sm: 6 },
+    gap: { xs: 3, sm: 4, md: 5, lg: 6 },
     borderRadius: 2,
     position: 'relative',
     overflow: 'hidden',
@@ -78,9 +78,10 @@ const styles = {
     border: '1px solid var(--border-color)',
     transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
     overflow: 'auto',
-    minHeight: { xs: 'auto', sm: '170px', md: '190px' },
+    minHeight: { xs: 'auto', sm: '180px', md: '200px', lg: '220px' },
     height: 'auto',
-    width: { xs: '100%', sm: '600px', md: '750px' },
+    width: { xs: '100%', sm: '100%', md: '90%', lg: '750px' },
+    maxWidth: { xs: '100%', sm: '500px', md: '600px', lg: '750px' },
     display: 'flex',
     flexDirection: { xs: 'column', sm: 'row' },
     '&:hover': {
@@ -95,7 +96,7 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: { xs: 1.5, sm: 2, md: 2.5 },
+    padding: { xs: 1.5, sm: 1.5, md: 2, lg: 2.5 },
     backgroundColor: 'var(--bg-secondary)',
   },
   logo: {
@@ -111,8 +112,8 @@ const styles = {
     flex: 1,
     display: 'flex',
     flexDirection: 'column',
-    padding: { xs: 1.5, sm: 2.5, md: 3 },
-    gap: { xs: 0.5, sm: 1 },
+    padding: { xs: 1.5, sm: 2, md: 2.5, lg: 3 },
+    gap: { xs: 0.5, sm: 0.75, md: 1, lg: 1.25 },
     justifyContent: { xs: 'flex-start', sm: 'center' },
     overflow: 'visible',
     height: '100%',
@@ -150,7 +151,7 @@ const styles = {
       paddingBottom: { xs: '35px', md: '50px' },
     },
     '& .slick-slide': {
-      padding: { xs: '0 10px', sm: '0 20px', md: '0 40px' },
+      padding: { xs: '0 6px', sm: '0 8px', md: '0 8px', lg: '0 12px' },
       height: 'auto',
       transition: 'opacity 0.3s ease',
       '& > div': {
@@ -159,7 +160,7 @@ const styles = {
       },
     },
     '& .slick-list': {
-      margin: { xs: '0 -10px', sm: '0 -20px', md: '0 -40px' },
+      margin: { xs: '0 -6px', sm: '0 -8px', md: '0 -8px', lg: '0 -12px' },
       overflow: 'visible',
     },
     '& .slick-track': {
@@ -268,7 +269,7 @@ function ServiceCard() {
     dots: true,
     infinite: true,
     speed: 3000,
-    slidesToShow: 2,
+    slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 100,
@@ -279,7 +280,7 @@ function ServiceCard() {
     touchMove: true,
     responsive: [
       {
-        breakpoint: 1024,
+        breakpoint: 1440,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 1,
@@ -288,9 +289,18 @@ function ServiceCard() {
         },
       },
       {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          speed: 3000,
+          autoplaySpeed: 100,
+        },
+      },
+      {
         breakpoint: 768,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 1,
           slidesToScroll: 1,
           speed: 3000,
           autoplaySpeed: 100,
