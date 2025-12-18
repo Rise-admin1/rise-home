@@ -3,6 +3,9 @@ import Home from "./pages/Home";
 import Footer from "./components/Footer";
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom'
 import Careers from "./pages/Careers";
+import Investors from "./pages/Investors";
+import PaymentSuccess from "./pages/PaymentSuccess";
+import PaymentCancelled from "./pages/PaymentCancelled";
 import UnderConstruction from "./components/UnderConstruction";
 
 function App() {
@@ -30,6 +33,18 @@ function App() {
       {
         path: "/careers",
         element: <Careers />,
+      },
+      {
+        path: "/investors",
+        element: <Investors />,
+      },
+      {
+        path: "/payment/success",
+        element: <PaymentSuccess />,
+      },
+      {
+        path: "/payment/cancelled",
+        element: <PaymentCancelled />,
       },
       {
         path: "/app-update",

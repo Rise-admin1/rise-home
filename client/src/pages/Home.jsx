@@ -2,6 +2,7 @@ import React from 'react'
 import About from '../components/About'
 import FoundersNote from '../components/FoundersNote'
 import ServiceCard from '../components/ServiceCard'
+import InvestorSection from '../components/InvestorSection'
 import ContactForm from '../components/ContactForm'
 import CookiePopup from '../components/CookiePopup'
 
@@ -11,6 +12,7 @@ const Home = () => {
         <About />
         <FoundersNote />
         <ServiceCard />
+        <InvestorSection />
         <ContactForm />
         <CookiePopup />
     </div>
