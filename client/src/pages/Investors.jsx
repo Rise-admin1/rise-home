@@ -313,8 +313,8 @@ function Investors() {
 
   const investmentTiers = generateInvestmentTiers();
   
-  // const API_BASE_URL = 'https://react-journal1.onrender.com';
-  const API_BASE_URL = 'http://localhost:3001';
+  const API_BASE_URL = 'https://react-journal1.onrender.com';
+  // const API_BASE_URL = 'http://localhost:3001';
 
   const handleSubmit = () => {
     let hasError = false;
