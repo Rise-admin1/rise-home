@@ -140,21 +140,21 @@ function PaymentSuccess() {
           
           <Typography sx={styles.message}>
             Thank you for your investment in RISE. Your payment has been processed successfully.
-            We will be getting back to you within 48 hours with complete formalities.
+            Acknowledging the contribution and reiterating further contact and formalities within 48hrs.
+          </Typography>
+
+          <Typography sx={styles.redirectMessage}>
+            A confirmation email has been sent to your email address with all the details.
           </Typography>
 
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, marginTop: 2 }}>
-            <TrendingUpIcon sx={{ color: '#4caf50', fontSize: '2rem' }} />
+
             <Typography variant="h6" sx={{ color: 'var(--text-primary)', fontWeight: 600 }}>
               Your investment is confirmed
             </Typography>
           </Box>
 
-          {sessionId && (
-            <Box sx={styles.sessionId}>
-              Transaction ID: {sessionId}
-            </Box>
-          )}
+         
 
           <Box sx={styles.buttonContainer}>
             <Button
@@ -174,9 +174,7 @@ function PaymentSuccess() {
             </Button>
           </Box>
 
-          <Box sx={styles.bottomImage}>
-            <img src={firstImage} alt="Success" style={{ width: '100%', height: 'auto', objectFit: 'contain' }} />
-          </Box>
+
         </Paper>
       </Fade>
     </Box>
