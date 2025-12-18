@@ -9,7 +9,6 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import HomeIcon from '@mui/icons-material/Home';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import CircularProgress from '@mui/material/CircularProgress';
-import firstImage from '../assets/first.png';
 
 const styles = {
   pageContainer: {
