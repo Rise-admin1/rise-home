@@ -129,7 +129,7 @@ const Navbar = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [activeItem, setActiveItem] = useState('');
   
-  const navItems = ['About', 'Careers', 'Contact'];
+  const navItems = ['About', 'Careers', 'Contact', 'Profiles', 'Reports'];
 
   const handleDrawerToggle = () => {
     setDrawerOpen(!drawerOpen);
@@ -142,6 +142,10 @@ const Navbar = () => {
     if (item === 'Careers') {
       // Use navigate to go to the Careers page
       navigate('/careers');
+    } else if (item === 'Profiles') {
+      navigate('/profile');
+    } else if (item === 'Reports') {
+      navigate('/reports');
     } else {
       // Scroll to section relative to the base URL
       const baseUrl = `${window.location.origin}/`;
