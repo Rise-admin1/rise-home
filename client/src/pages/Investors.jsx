@@ -15,6 +15,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import VerifiedIcon from '@mui/icons-material/Verified';
 import axios from 'axios';
 
 const styles = {
@@ -236,12 +237,19 @@ const styles = {
     fontWeight: 600,
     marginTop: 0.5,
   },
+  otpContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    gap: 2,
+    width: '100%',
+  },
 };
 
 const generateInvestmentTiers = () => {
-  // Predefined uniform tier amounts from 1000 AED to 999k AED (Stripe limit)
+  // Predefined uniform tier amounts from 10 AED to 999k AED (Stripe limit)
   const tiers = [
-    1000, 2000, 3000, 5000, 7000, 10000, 13000, 15000, 18000, 20000,
+     1000, 2000, 3000, 5000, 7000, 10000, 13000, 15000, 18000, 20000,
     25000, 30000, 35000, 40000, 50000, 60000, 70000, 80000, 90000, 100000,
     120000, 150000, 180000, 200000, 250000, 300000, 350000, 400000, 450000, 500000,
     600000, 700000, 750000, 800000, 850000, 900000, 950000, 975000, 990000, 999000
@@ -301,12 +309,16 @@ const validatePhone = (phone) => {
 
 function Investors() {
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [showOTP, setShowOTP] = useState(false);
+  const [otpVerified, setOtpVerified] = useState(false);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [emailError, setEmailError] = useState('');
   const [phoneError, setPhoneError] = useState('');
   const [nameError, setNameError] = useState('');
+  const [otp, setOtp] = useState('');
+  const [otpError, setOtpError] = useState('');
   const [loading, setLoading] = useState(false);
   const [loadingTier, setLoadingTier] = useState(null);
   const [error, setError] = useState('');
@@ -316,7 +328,7 @@ function Investors() {
   const API_BASE_URL = 'https://react-journal1.onrender.com';
   // const API_BASE_URL = 'http://localhost:3001';
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     let hasError = false;
 
     // Validate name (optional but must be valid if provided)
@@ -356,7 +368,60 @@ function Investors() {
     }
 
     if (!hasError) {
-      setFormSubmitted(true);
+      setLoading(true);
+      setError('');
+      try {
+        const response = await axios.post(
+          `${API_BASE_URL}/api/rise/submit-investor-request`,
+          { name: name || '', email, phone: phone || '' }
+        );
+        
+        if (response.data.success) {
+          setShowOTP(true);
+        } else {
+          setError(response.data.message || 'Failed to submit request');
+        }
+      } catch (error) {
+        console.error('Error submitting investor request:', error);
+        setError(error.response?.data?.message || 'Failed to submit request. Please try again.');
+      } finally {
+        setLoading(false);
+      }
+    }
+  };
+
+  const handleOtpChange = (e) => {
+    const value = e.target.value.replace(/\D/g, '').slice(0, 4);
+    setOtp(value);
+    if (otpError) setOtpError('');
+  };
+
+  const handleOtpVerify = async () => {
+    if (!otp || otp.length !== 4) {
+      setOtpError('Please enter a valid 4-digit OTP');
+      return;
+    }
+
+    setLoading(true);
+    setOtpError('');
+    try {
+      const response = await axios.post(
+        `${API_BASE_URL}/api/rise/verify-otp`,
+        { email, otp }
+      );
+      
+      if (response.data.success) {
+        setOtpVerified(true);
+        setShowOTP(false);
+        setFormSubmitted(true);
+      } else {
+        setOtpError(response.data.message || 'Failed to verify OTP');
+      }
+    } catch (error) {
+      console.error('Error verifying OTP:', error);
+      setOtpError(error.response?.data?.message || 'Invalid OTP. Please check and try again.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -411,8 +476,8 @@ function Investors() {
 
   return (
     <Box sx={styles.pageContainer}>
-      {!formSubmitted && (
-        <Fade in={!formSubmitted} timeout={500}>
+      {!formSubmitted && !showOTP && (
+        <Fade in={!formSubmitted && !showOTP} timeout={500}>
           <Paper elevation={8} sx={styles.formContainer}>
             <Box sx={{ width: '100%', textAlign: 'center', mb: 2 }}>
               <Typography variant="h4" sx={styles.formTitle}>
@@ -435,7 +500,7 @@ function Investors() {
                 if (nameError) setNameError('');
               }}
               error={!!nameError}
-              helperText={nameError }
+              helperText={nameError || 'Optional'}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -491,6 +556,17 @@ function Investors() {
               placeholder="+971 50 123 4567"
             />
 
+            {error && (
+              <Alert 
+                icon={<CancelIcon />}
+                severity="error"
+                sx={{ width: '100%', maxWidth: '400px' }}
+                onClose={() => setError('')}
+              >
+                {error}
+              </Alert>
+            )}
+
             <Button 
               onClick={handleSubmit} 
               sx={styles.button}
@@ -503,8 +579,52 @@ function Investors() {
         </Fade>
       )}
 
-      {formSubmitted && (
-        <Fade in={formSubmitted} timeout={500}>
+      {showOTP && (
+        <Fade in={showOTP} timeout={500}>
+          <Paper elevation={8} sx={styles.formContainer}>
+            <Box sx={{ width: '100%', textAlign: 'center', mb: 2 }}>
+              <Typography variant="h4" sx={styles.formTitle}>
+                Verify OTP
+              </Typography>
+              <Typography sx={styles.formSubtitle}>
+                Please enter the 4-digit OTP sent to your email
+              </Typography>
+            </Box>
+            
+            <Divider sx={{ width: '100%', my: 1 }} />
+
+            <Box sx={styles.otpContainer}>
+              <TextField
+                label="OTP"
+                variant="outlined"
+                sx={styles.textField}
+                required
+                value={otp}
+                onChange={handleOtpChange}
+                error={!!otpError}
+                helperText={otpError || 'Enter 4-digit OTP'}
+                placeholder="1234"
+                inputProps={{
+                  maxLength: 4,
+                  style: { textAlign: 'center', fontSize: '1.5rem', letterSpacing: '0.5em' }
+                }}
+              />
+
+              <Button 
+                onClick={handleOtpVerify} 
+                sx={styles.button}
+                disabled={loading || otp.length !== 4}
+                endIcon={!loading && <VerifiedIcon />}
+              >
+                {loading ? <CircularProgress size={24} sx={{ color: '#ffffff' }} /> : 'Verify OTP'}
+              </Button>
+            </Box>
+          </Paper>
+        </Fade>
+      )}
+
+      {formSubmitted && otpVerified && (
+        <Fade in={formSubmitted && otpVerified} timeout={500}>
           <Box sx={styles.tiersContainer}>
             <Typography variant="h2" sx={styles.tiersTitle}>
               Investment Tiers
