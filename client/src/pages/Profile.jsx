@@ -465,12 +465,7 @@ function Profile() {
           <Typography variant="h1" sx={styles.title}>
             Profiles
           </Typography>
-          <Typography sx={styles.description}>
-            Our profiles provide comprehensive insights into individuals, organizations, and entities. 
-            These detailed profiles include background information, achievements, and relevant data 
-            that help you make informed decisions. Whether you're researching potential partners, 
-            clients, or opportunities, our profile service delivers the information you need.
-          </Typography>
+        
           <Button 
             onClick={handleGetProfile} 
             sx={styles.button}

@@ -465,13 +465,7 @@ function Reports() {
           <Typography variant="h1" sx={styles.title}>
             Reports
           </Typography>
-          <Typography sx={styles.description}>
-            Our comprehensive reports provide detailed analysis and insights across various domains. 
-            These reports include market analysis, financial summaries, performance metrics, and 
-            strategic recommendations. Whether you need business intelligence, research data, or 
-            analytical insights, our report service delivers accurate and actionable information 
-            to support your decision-making process.
-          </Typography>
+          
           <Button 
             onClick={handleGetReport} 
             sx={styles.button}
