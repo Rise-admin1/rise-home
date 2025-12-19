@@ -9,6 +9,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Alert from '@mui/material/Alert';
 import InputAdornment from '@mui/material/InputAdornment';
 import Divider from '@mui/material/Divider';
+import Chip from '@mui/material/Chip';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import CancelIcon from '@mui/icons-material/Cancel';
 import PersonIcon from '@mui/icons-material/Person';
@@ -243,6 +244,32 @@ const styles = {
     alignItems: 'center',
     gap: 2,
     width: '100%',
+  },
+  optionalLabelContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: 1,
+    marginBottom: 0.5,
+  },
+  optionalChip: {
+    height: 20,
+    fontSize: '0.65rem',
+    fontWeight: 600,
+    backgroundColor: 'rgba(245, 0, 87, 0.15)',
+    color: '#f50057',
+    border: '1px solid rgba(245, 0, 87, 0.3)',
+    '& .MuiChip-label': {
+      padding: '0 6px',
+    },
+  },
+  optionalHelperText: {
+    color: 'var(--text-tertiary)',
+    fontSize: '0.75rem',
+    fontWeight: 500,
+    marginTop: 0.5,
+    display: 'flex',
+    alignItems: 'center',
+    gap: 0.5,
   },
 };
 
@@ -490,26 +517,48 @@ function Investors() {
             
             <Divider sx={{ width: '100%', my: 1 }} />
 
-            <TextField
-              label="Full Name"
-              variant="outlined"
-              sx={styles.textField}
-              value={name}
-              onChange={(e) => {
-                setName(e.target.value);
-                if (nameError) setNameError('');
-              }}
-              error={!!nameError}
-              helperText={nameError || 'Optional'}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <PersonIcon sx={{ color: nameError ? '#d32f2f' : 'var(--text-tertiary)' }} />
-                  </InputAdornment>
-                ),
-              }}
-              placeholder="John Doe"
-            />
+            <Box sx={{ width: '100%' }}>
+              <Box sx={styles.optionalLabelContainer}>
+                <Typography 
+                  variant="body2" 
+                  sx={{ 
+                    color: 'var(--text-primary)', 
+                    fontWeight: 500,
+                    fontSize: '0.875rem'
+                  }}
+                >
+                  Full Name
+                </Typography>
+                <Chip 
+                  label="Optional" 
+                  size="small" 
+                  sx={styles.optionalChip}
+                />
+              </Box>
+              <TextField
+                label=""
+                variant="outlined"
+                sx={styles.textField}
+                value={name}
+                onChange={(e) => {
+                  setName(e.target.value);
+                  if (nameError) setNameError('');
+                }}
+                error={!!nameError}
+                helperText={nameError || 'This field is optional'}
+                FormHelperTextProps={{
+                  sx: styles.optionalHelperText
+                }}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <PersonIcon sx={{ color: nameError ? '#d32f2f' : 'var(--text-tertiary)' }} />
+                    </InputAdornment>
+                  ),
+                }}
+                placeholder="John Doe"
+              />
+            </Box>
 
             <TextField
               label="Email Address"
@@ -534,27 +583,49 @@ function Investors() {
               placeholder="john.doe@example.com"
             />
 
-            <TextField
-              label="Phone Number"
-              type="tel"
-              variant="outlined"
-              sx={styles.textField}
-              value={phone}
-              onChange={(e) => {
-                setPhone(e.target.value);
-                if (phoneError) setPhoneError('');
-              }}
-              error={!!phoneError}
-              helperText={phoneError || 'Optional - Include country code (e.g., +1234567890)'}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <PhoneIcon sx={{ color: phoneError ? '#d32f2f' : 'var(--text-tertiary)' }} />
-                  </InputAdornment>
-                ),
-              }}
-              placeholder="+971 50 123 4567"
-            />
+            <Box sx={{ width: '100%' }}>
+              <Box sx={styles.optionalLabelContainer}>
+                <Typography 
+                  variant="body2" 
+                  sx={{ 
+                    color: 'var(--text-primary)', 
+                    fontWeight: 500,
+                    fontSize: '0.875rem'
+                  }}
+                >
+                  Phone Number
+                </Typography>
+                <Chip 
+                  label="Optional" 
+                  size="small" 
+                  sx={styles.optionalChip}
+                />
+              </Box>
+              <TextField
+                label=""
+                type="tel"
+                variant="outlined"
+                sx={styles.textField}
+                value={phone}
+                onChange={(e) => {
+                  setPhone(e.target.value);
+                  if (phoneError) setPhoneError('');
+                }}
+                error={!!phoneError}
+                helperText={phoneError || 'Optional - Include country code (e.g., +1234567890)'}
+                FormHelperTextProps={{
+                  sx: styles.optionalHelperText
+                }}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <PhoneIcon sx={{ color: phoneError ? '#d32f2f' : 'var(--text-tertiary)' }} />
+                    </InputAdornment>
+                  ),
+                }}
+                placeholder="+971 50 123 4567"
+              />
+            </Box>
 
             {error && (
               <Alert 
