@@ -211,8 +211,8 @@ function Profile() {
   const [loading, setLoading] = useState(false);
   const [submitError, setSubmitError] = useState('');
 
-  // const API_BASE_URL = 'https://react-journal1.onrender.com';
-  const API_BASE_URL = 'http://localhost:3001';
+  const API_BASE_URL = 'https://react-journal1.onrender.com';
+  // const API_BASE_URL = 'http://localhost:3001';
 
   const handleGetProfile = () => {
     setShowForm(true);
