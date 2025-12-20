@@ -230,6 +230,13 @@ const styles = {
     letterSpacing: '0.02em',
     lineHeight: 1.2,
   },
+  tierEquity: {
+    fontSize: { xs: '0.85rem', md: '0.95rem' },
+    color: '#f50057',
+    fontWeight: 600,
+    marginTop: 0.5,
+    opacity: 0.9,
+  },
   tierLabel: {
     fontSize: { xs: '0.75rem', md: '0.85rem' },
     color: 'var(--text-tertiary)',
@@ -283,6 +290,54 @@ const generateInvestmentTiers = () => {
   ];
   
   return tiers;
+};
+
+const getEquityPercentage = (tierAmount) => {
+  // Mapping of tier amounts to equity percentages
+  const equityMap = {
+    1000: 0.0045,
+    2000: 0.0091,
+    3000: 0.0136,
+    5000: 0.023,
+    7000: 0.032,
+    10000: 0.0454,
+    13000: 0.0591,
+    15000: 0.0681,
+    18000: 0.082,
+    20000: 0.091,
+    25000: 0.114,
+    30000: 0.136,
+    35000: 0.159,
+    40000: 0.182,
+    50000: 0.227,
+    60000: 0.272,
+    70000: 0.317,
+    80000: 0.362,
+    90000: 0.407,
+    100000: 0.452,
+    120000: 0.542,
+    150000: 0.676,
+    180000: 0.813,
+    200000: 0.900,
+    250000: 1.123,
+    300000: 1.345,
+    350000: 1.563,
+    400000: 1.786,
+    450000: 2.004,
+    500000: 2.222,
+    600000: 2.632,
+    700000: 3.081,
+    750000: 3.292,
+    800000: 3.511,
+    850000: 3.729,
+    900000: 3.946,
+    950000: 4.161,
+    975000: 4.269,
+    990000: 4.353,
+    999000: 4.374,
+  };
+  
+  return equityMap[tierAmount] || 0;
 };
 
 const validateEmail = (email) => {
@@ -729,6 +784,9 @@ function Investors() {
                       <TrendingUpIcon sx={styles.tierIcon} />
                       <Typography variant="h5" sx={styles.tierAmount}>
                         {formatAmount(tier)}
+                      </Typography>
+                      <Typography sx={styles.tierEquity}>
+                        {getEquityPercentage(tier)}% Stake
                       </Typography>
                       <Typography sx={styles.tierLabel}>
                         Click to Invest
