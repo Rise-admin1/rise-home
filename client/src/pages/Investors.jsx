@@ -572,48 +572,7 @@ function Investors() {
             
             <Divider sx={{ width: '100%', my: 1 }} />
 
-            <Box sx={{ width: '100%' }}>
-              <Box sx={styles.optionalLabelContainer}>
-                <Typography 
-                  variant="body2" 
-                  sx={{ 
-                    color: 'var(--text-primary)', 
-                    fontWeight: 500,
-                    fontSize: '0.875rem'
-                  }}
-                >
-                  Full Name
-                </Typography>
-                <Chip 
-                  label="Optional" 
-                  size="small" 
-                  sx={styles.optionalChip}
-                />
-              </Box>
-              <TextField
-                label=""
-                variant="outlined"
-                sx={styles.textField}
-                value={name}
-                onChange={(e) => {
-                  setName(e.target.value);
-                  if (nameError) setNameError('');
-                }}
-                error={!!nameError}
-                helperText={nameError || 'This field is optional'}
-                FormHelperTextProps={{
-                  sx: styles.optionalHelperText
-                }}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <PersonIcon sx={{ color: nameError ? '#d32f2f' : 'var(--text-tertiary)' }} />
-                    </InputAdornment>
-                  ),
-                }}
-                placeholder="John Doe"
-              />
-            </Box>
+           
 
             <TextField
               label="Email Address"
@@ -638,49 +597,7 @@ function Investors() {
               placeholder="john.doe@example.com"
             />
 
-            <Box sx={{ width: '100%' }}>
-              <Box sx={styles.optionalLabelContainer}>
-                <Typography 
-                  variant="body2" 
-                  sx={{ 
-                    color: 'var(--text-primary)', 
-                    fontWeight: 500,
-                    fontSize: '0.875rem'
-                  }}
-                >
-                  Phone Number
-                </Typography>
-                <Chip 
-                  label="Optional" 
-                  size="small" 
-                  sx={styles.optionalChip}
-                />
-              </Box>
-              <TextField
-                label=""
-                type="tel"
-                variant="outlined"
-                sx={styles.textField}
-                value={phone}
-                onChange={(e) => {
-                  setPhone(e.target.value);
-                  if (phoneError) setPhoneError('');
-                }}
-                error={!!phoneError}
-                helperText={phoneError || 'Optional - Include country code (e.g., +1234567890)'}
-                FormHelperTextProps={{
-                  sx: styles.optionalHelperText
-                }}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <PhoneIcon sx={{ color: phoneError ? '#d32f2f' : 'var(--text-tertiary)' }} />
-                    </InputAdornment>
-                  ),
-                }}
-                placeholder="+971 50 123 4567"
-              />
-            </Box>
+         
 
             {error && (
               <Alert 
