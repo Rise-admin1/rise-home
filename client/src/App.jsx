@@ -8,6 +8,7 @@ import Profile from "./pages/Profile";
 import Reports from "./pages/Reports";
 import PaymentSuccess from "./pages/PaymentSuccess";
 import PaymentCancelled from "./pages/PaymentCancelled";
+import Vault from "./pages/Vault";
 import UnderConstruction from "./components/UnderConstruction";
 
 function App() {
@@ -59,6 +60,10 @@ function App() {
       {
         path: "/app-update",
         element: <UnderConstruction />,
+      },
+      {
+        path: "/vault",
+        element: <Vault />,
       },
 
     ]
