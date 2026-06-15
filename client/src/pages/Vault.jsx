@@ -136,7 +136,7 @@ const pageStyles = {
   },
 };
 
-function VaultLogin({ onLogin }) {
+function VaultLogin({ onLogin, sessionExpiredNotice }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
@@ -152,6 +152,7 @@ function VaultLogin({ onLogin }) {
         username: resp.data.username,
         role: resp.data.role,
         expiresAt: resp.data.expiresAt ?? null,
+        sessionExpiresAt: resp.data.sessionExpiresAt ?? null,
         documentIds: resp.data.documentIds ?? [],
       });
     } catch (err) {
@@ -174,6 +175,8 @@ function VaultLogin({ onLogin }) {
               Sign in to access secure documents
             </Typography>
           </Box>
+
+          {sessionExpiredNotice && <Alert severity="warning">{sessionExpiredNotice}</Alert>}
 
           {error && <Alert severity="error">{error}</Alert>}
 
@@ -955,6 +958,13 @@ function VaultDashboard({ session, onLogout, onSessionExpired }) {
 export default function Vault() {
   const [session, setSession] = useState(null);
   const [checkingSession, setCheckingSession] = useState(true);
+  const [sessionExpiredNotice, setSessionExpiredNotice] = useState(null);
+
+  const handleSessionExpired = useCallback(() => {
+    clearVaultSession();
+    setSession(null);
+    setSessionExpiredNotice('Your session expired after 1 hour. Please sign in again.');
+  }, []);
 
   useEffect(() => {
     const restoreSession = async () => {
@@ -969,6 +979,7 @@ export default function Vault() {
           username: resp.data.username,
           role: resp.data.role,
           expiresAt: resp.data.expiresAt ?? null,
+          sessionExpiresAt: resp.data.sessionExpiresAt ?? null,
           documentIds: resp.data.documentIds ?? [],
         });
       } catch {
@@ -982,7 +993,21 @@ export default function Vault() {
     restoreSession();
   }, []);
 
+  useEffect(() => {
+    if (!session?.sessionExpiresAt) return undefined;
+
+    const remaining = new Date(session.sessionExpiresAt).getTime() - Date.now();
+    if (remaining <= 0) {
+      handleSessionExpired();
+      return undefined;
+    }
+
+    const timer = window.setTimeout(handleSessionExpired, remaining);
+    return () => window.clearTimeout(timer);
+  }, [session?.sessionExpiresAt, handleSessionExpired]);
+
   const handleLogin = (loginSession) => {
+    setSessionExpiredNotice(null);
     setSession(loginSession);
   };
 
@@ -995,11 +1020,6 @@ export default function Vault() {
     setSession(null);
   };
 
-  const handleSessionExpired = () => {
-    clearVaultSession();
-    setSession(null);
-  };
-
   if (checkingSession) {
     return (
       <Box sx={{ ...pageStyles.pageContainer, justifyContent: 'center' }}>
@@ -1009,7 +1029,7 @@ export default function Vault() {
   }
 
   if (!session?.username) {
-    return <VaultLogin onLogin={handleLogin} />;
+    return <VaultLogin onLogin={handleLogin} sessionExpiredNotice={sessionExpiredNotice} />;
   }
 
   return (
