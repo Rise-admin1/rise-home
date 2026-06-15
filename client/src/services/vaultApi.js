@@ -1,5 +1,5 @@
-const API_BASE_URL = 'http://localhost:3001';
-// const API_BASE_URL = 'https://future.funyula.com';
+// const API_BASE_URL = 'http://localhost:3001';
+const API_BASE_URL = 'https://future.funyula.com';
 
 const VAULT_TOKEN_KEY = 'vault_token';
 
