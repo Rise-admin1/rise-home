@@ -1,5 +1,5 @@
-// const API_BASE_URL = 'http://localhost:3001';
-const API_BASE_URL = 'https://future.funyula.com';
+const API_BASE_URL = 'http://localhost:3001';
+// const API_BASE_URL = 'https://future.funyula.com';
 
 const VAULT_TOKEN_KEY = 'vault_token';
 
@@ -130,6 +130,17 @@ export async function createVaultGuestAccess({ username, password, documentIds }
 
 export async function fetchVaultGuestAccess() {
   return vaultFetch(`${API_BASE_URL}/api/rise-reports/vault/guest-access`);
+}
+
+export async function addVaultGuestDocuments({ guestId, documentIds }) {
+  return vaultFetch(
+    `${API_BASE_URL}/api/rise-reports/vault/guest-access/${encodeURIComponent(guestId)}/documents`,
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ documentIds }),
+    }
+  );
 }
 
 export async function revokeVaultGuestAccess({ id }) {

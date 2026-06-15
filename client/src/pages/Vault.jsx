@@ -28,12 +28,14 @@ import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import DownloadIcon from '@mui/icons-material/Download';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ShareIcon from '@mui/icons-material/Share';
+import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
 import FolderOpenIcon from '@mui/icons-material/FolderOpen';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import ImageIcon from '@mui/icons-material/Image';
 import DescriptionIcon from '@mui/icons-material/Description';
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import {
+  addVaultGuestDocuments,
   clearVaultSession,
   createVaultGuestAccess,
   deleteVaultDocument,
@@ -246,6 +248,9 @@ function VaultDashboard({ session, onLogout, onSessionExpired }) {
   const [sharePassword, setSharePassword] = useState('');
   const [isSharing, setIsSharing] = useState(false);
   const [shareResult, setShareResult] = useState(null);
+  const [addDocsGuest, setAddDocsGuest] = useState(null);
+  const [addDocsSelectedIds, setAddDocsSelectedIds] = useState([]);
+  const [isAddingDocs, setIsAddingDocs] = useState(false);
   const fileInputRef = useRef(null);
   const requestIdRef = useRef(0);
 
@@ -358,6 +363,18 @@ function VaultDashboard({ session, onLogout, onSessionExpired }) {
     setIsSharing(false);
   };
 
+  const closeAddDocsModal = () => {
+    setAddDocsGuest(null);
+    setAddDocsSelectedIds([]);
+    setIsAddingDocs(false);
+  };
+
+  const openAddDocsModal = (guest) => {
+    setAddDocsGuest(guest);
+    setAddDocsSelectedIds([]);
+    setApiError(null);
+  };
+
   const openShareModal = (initialDocIds = []) => {
     const fromList = listSelectedDocIds.length > 0 ? listSelectedDocIds : initialDocIds;
     setShareSelectedDocIds(fromList);
@@ -460,10 +477,54 @@ function VaultDashboard({ session, onLogout, onSessionExpired }) {
     }
   };
 
+  const handleConfirmAddDocs = async () => {
+    if (!addDocsGuest || addDocsSelectedIds.length === 0) return;
+
+    setIsAddingDocs(true);
+    setApiError(null);
+
+    try {
+      const resp = await addVaultGuestDocuments({
+        guestId: addDocsGuest.id,
+        documentIds: addDocsSelectedIds,
+      });
+      setGuestAccess((prev) =>
+        prev.map((guest) => (guest.id === addDocsGuest.id ? resp.data : guest))
+      );
+      closeAddDocsModal();
+    } catch (e) {
+      if (e.message?.includes('Session expired')) {
+        onSessionExpired();
+        return;
+      }
+      setApiError(e.message || 'Failed to add documents to guest access');
+    } finally {
+      setIsAddingDocs(false);
+    }
+  };
+
+  const toggleAddDocsSelection = (docId) => {
+    setAddDocsSelectedIds((prev) =>
+      prev.includes(docId) ? prev.filter((id) => id !== docId) : [...prev, docId]
+    );
+  };
+
   const guestForDocument = (docId) =>
     guestAccess.find((g) => g.documents?.some((d) => d.id === docId));
 
   const isDocShared = (docId) => !!guestForDocument(docId);
+
+  const guestAssignedDocIds = (guest) => new Set(guest.documents?.map((doc) => doc.id) ?? []);
+
+  const availableDocsForGuest = (guest) =>
+    documents.filter((doc) => {
+      const sharedGuest = guestForDocument(doc.id);
+      if (!sharedGuest) return true;
+      return sharedGuest.id === guest.id;
+    });
+
+  const addableDocsForGuest = (guest) =>
+    availableDocsForGuest(guest).filter((doc) => !guestAssignedDocIds(guest).has(doc.id));
 
   const emptyMessage = isGuest
     ? 'No document has been assigned to your account.'
@@ -642,11 +703,25 @@ function VaultDashboard({ session, onLogout, onSessionExpired }) {
                   key={guest.id}
                   sx={pageStyles.docRow}
                   secondaryAction={
-                    <Tooltip title="Revoke access">
-                      <IconButton edge="end" onClick={() => handleRevokeGuest(guest.id)} color="error">
-                        <DeleteIcon />
-                      </IconButton>
-                    </Tooltip>
+                    <Box>
+                      <Tooltip title="Add documents">
+                        <span>
+                          <IconButton
+                            edge="end"
+                            onClick={() => openAddDocsModal(guest)}
+                            sx={{ mr: 0.5 }}
+                            disabled={addableDocsForGuest(guest).length === 0}
+                          >
+                            <PlaylistAddIcon />
+                          </IconButton>
+                        </span>
+                      </Tooltip>
+                      <Tooltip title="Revoke access">
+                        <IconButton edge="end" onClick={() => handleRevokeGuest(guest.id)} color="error">
+                          <DeleteIcon />
+                        </IconButton>
+                      </Tooltip>
+                    </Box>
                   }
                 >
                   <ListItemText
@@ -810,6 +885,66 @@ function VaultDashboard({ session, onLogout, onSessionExpired }) {
         <DialogActions>
           <Button onClick={() => setShareResult(null)} variant="contained">
             Done
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      <Dialog open={!!addDocsGuest} onClose={closeAddDocsModal} maxWidth="sm" fullWidth>
+        <DialogTitle>Add documents to guest</DialogTitle>
+        <DialogContent>
+          {addDocsGuest && (
+            <>
+              <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                Select documents to assign to <strong>{addDocsGuest.username}</strong>. Existing
+                assignments are unchanged.
+              </Typography>
+              {addableDocsForGuest(addDocsGuest).length === 0 ? (
+                <Typography color="text.secondary">
+                  No additional documents are available to assign.
+                </Typography>
+              ) : (
+                <List disablePadding>
+                  {addableDocsForGuest(addDocsGuest).map((doc) => {
+                    const Icon = mimeIcon(doc.mimeType);
+                    return (
+                      <ListItem
+                        key={doc.id}
+                        sx={{ ...pageStyles.docRow, px: 1 }}
+                        secondaryAction={
+                          <Checkbox
+                            edge="end"
+                            checked={addDocsSelectedIds.includes(doc.id)}
+                            onChange={() => toggleAddDocsSelection(doc.id)}
+                            disabled={isAddingDocs}
+                          />
+                        }
+                      >
+                        <ListItemIcon sx={{ minWidth: 40 }}>
+                          <Icon sx={{ color: '#f50057' }} />
+                        </ListItemIcon>
+                        <ListItemText
+                          primary={displayName(doc)}
+                          secondary={formatBytes(doc.sizeBytes)}
+                          primaryTypographyProps={{ fontWeight: 600 }}
+                        />
+                      </ListItem>
+                    );
+                  })}
+                </List>
+              )}
+            </>
+          )}
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={closeAddDocsModal} disabled={isAddingDocs}>
+            Cancel
+          </Button>
+          <Button
+            onClick={handleConfirmAddDocs}
+            variant="contained"
+            disabled={isAddingDocs || addDocsSelectedIds.length === 0}
+          >
+            {isAddingDocs ? <CircularProgress size={20} /> : 'Add documents'}
           </Button>
         </DialogActions>
       </Dialog>
