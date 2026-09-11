@@ -10,6 +10,8 @@ import PaymentSuccess from "./pages/PaymentSuccess";
 import PaymentCancelled from "./pages/PaymentCancelled";
 import Vault from "./pages/Vault";
 import UnderConstruction from "./components/UnderConstruction";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfService from "./pages/TermsOfService";
 
 function App() {
 
@@ -64,6 +66,14 @@ function App() {
       {
         path: "/vault",
         element: <Vault />,
+      },
+      {
+        path: "/privacy-policy",
+        element: <PrivacyPolicy />,
+      },
+      {
+        path: "/terms-of-service",
+        element: <TermsOfService />,
       },
 
     ]

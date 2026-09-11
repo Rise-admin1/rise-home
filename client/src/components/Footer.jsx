@@ -31,7 +31,8 @@ const styles = {
   links: {
     display: 'flex',
     flexDirection: 'row',
-    gap: 1,
+    flexWrap: 'wrap',
+    gap: 2,
     fontSize: '0.9rem',
     color: 'var(--text-tertiary)',
   },
@@ -115,8 +116,8 @@ function Footer() {
           <HashLink smooth to="/#about">About Us</HashLink>
           <HashLink smooth to="/#contact">Contact</HashLink>
           <Link to="/careers">Careers</Link>
-          <a href="/privacy-policy.pdf" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
-          <a href="/terms-of-service.pdf" target="_blank" rel="noopener noreferrer">Terms of Service</a>
+          <Link to="/privacy-policy">Privacy Policy</Link>
+          <Link to="/terms-of-service">Terms of Service</Link>
         </Box>
 
         {/* Social Media Icons */}
