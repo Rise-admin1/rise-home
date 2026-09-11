@@ -115,6 +115,8 @@ function Footer() {
           <HashLink smooth to="/#about">About Us</HashLink>
           <HashLink smooth to="/#contact">Contact</HashLink>
           <Link to="/careers">Careers</Link>
+          <a href="/privacy-policy.pdf" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+          <a href="/terms-of-service.pdf" target="_blank" rel="noopener noreferrer">Terms of Service</a>
         </Box>
 
         {/* Social Media Icons */}
